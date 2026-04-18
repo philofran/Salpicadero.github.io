@@ -53,18 +53,6 @@
             height: 35px;
             padding: 2px;
         }
-        .panel button {
-            padding: 7px 14px;
-            border: none;
-            border-radius: 8px;
-            background: #8B4513;
-            color: white;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        .panel button:hover { background: #a0522d; }
-
-        /* Galería */
         .galeria {
             display: grid;
             gap: 15px;
@@ -95,8 +83,6 @@
             height: 280px;
         }
         .galeria img:hover { transform: scale(1.05); }
-
-        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -143,8 +129,6 @@
 <h1 id="titulo">📷 Mis Fotos Familiares</h1>
 
 <div class="panel">
-
-    <!-- Título -->
     <div class="grupo">
         <label>Color del título</label>
         <input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()">
@@ -160,8 +144,6 @@
             <option value="Impact">Impact</option>
         </select>
     </div>
-
-    <!-- Forma de fotos -->
     <div class="grupo">
         <label>Forma de las fotos</label>
         <select id="formaFotos" onchange="cambiarForma()">
@@ -170,8 +152,6 @@
             <option value="grande">Cuadros grandes</option>
         </select>
     </div>
-
-    <!-- Fondo -->
     <div class="grupo">
         <label>Tipo de fondo</label>
         <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
@@ -180,32 +160,24 @@
             <option value="imagen">Mi imagen</option>
         </select>
     </div>
-
-    <!-- Fondo degradado -->
     <div class="grupo" id="grupoDegradado">
         <label>Color 1</label>
         <input type="color" id="color1" value="#ffecd2" onchange="aplicarDegradado()">
         <label>Color 2</label>
         <input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()">
     </div>
-
-    <!-- Fondo sólido -->
     <div class="grupo" id="grupoSolido" style="display:none">
         <label>Color de fondo</label>
         <input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()">
     </div>
-
-    <!-- Fondo imagen -->
     <div class="grupo" id="grupoImagen" style="display:none">
         <label>Subir imagen de fondo</label>
         <input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()">
     </div>
-
 </div>
 
 <div class="galeria cuadricula" id="galeria"></div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
     <span class="cerrar" onclick="cerrarLightbox()">✕</span>
     <span class="anterior" onclick="cambiarFoto(-1)">&#10094;</span>
@@ -214,27 +186,23 @@
 </div>
 
 <script>
-    // =============================================
-    // AGREGA TUS FOTOS AQUÍ — solo añade más líneas
-    // =============================================
-    const fotos = [
-        "foto1.jpg",
-        "foto2.jpg",
-        "foto3.jpg",
-        "foto4.jpg",
-        "foto5.jpg",
-        "foto6.jpg",
-        "foto7.jpg",
-        "foto8.jpg",
-        "foto9.jpg",
-        "foto10.jpg",
-    ];
-    // =============================================
-
+    let fotos = [];
     let fotoActual = 0;
+
+    // Lee las fotos desde fotos.json automáticamente
+    fetch('fotos.json')
+        .then(res => res.json())
+        .then(data => {
+            fotos = data;
+            cargarGaleria();
+        })
+        .catch(() => {
+            document.getElementById("galeria").innerHTML = "<p style='text-align:center'>No se encontró fotos.json</p>";
+        });
 
     function cargarGaleria() {
         const galeria = document.getElementById("galeria");
+        galeria.innerHTML = "";
         fotos.forEach((foto, index) => {
             const img = document.createElement("img");
             img.src = foto;
@@ -287,7 +255,6 @@
         const c1 = document.getElementById("color1").value;
         const c2 = document.getElementById("color2").value;
         document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-        document.body.style.backgroundSize = "";
     }
 
     function aplicarSolido() {
@@ -306,8 +273,6 @@
         if (e.key === "ArrowRight") cambiarFoto(1);
         if (e.key === "ArrowLeft") cambiarFoto(-1);
     });
-
-    cargarGaleria();
 </script>
 
 </body>
