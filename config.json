@@ -1,0 +1,24 @@
+{
+  "titulo": {
+    "texto": "📷 Mis Fotos Familiares",
+    "color": "#8B4513",
+    "tamano": "36",
+    "fuente": "Arial",
+    "diseno": "normal"
+  },
+  "fondo": {
+    "tipo": "degradado",
+    "color1": "#ffecd2",
+    "color2": "#fcb69f",
+    "colorSolido": "#ffecd2"
+  },
+  "fotos": {
+    "forma": "cuadricula",
+    "porPagina": "9",
+    "vista": "paginas"
+  },
+  "carpetas": {
+    "color": "#ffffff",
+    "opacidad": "40"
+  }
+}
