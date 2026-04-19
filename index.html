@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Fotos Familiares</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Lobster&family=Raleway:wght@700&family=Oswald:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
         body {
@@ -19,40 +20,52 @@
             color: #8B4513;
             font-size: 36px;
             margin-bottom: 15px;
+            transition: all 0.3s;
         }
+        /* Panel de controles */
         .panel {
             background: rgba(255,255,255,0.6);
             border-radius: 15px;
             padding: 15px 20px;
-            max-width: 850px;
-            margin: 0 auto 25px auto;
+            max-width: 950px;
+            margin: 0 auto 20px auto;
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
         }
-        .panel .grupo {
+        .grupo {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
-        .panel label {
+        .grupo label {
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
+            color: #555;
         }
-        .panel select, .panel input[type="color"] {
-            padding: 5px;
+        .grupo select, .grupo input[type="color"], .grupo input[type="range"] {
+            padding: 4px 6px;
             border-radius: 8px;
             border: 1px solid #ccc;
             cursor: pointer;
+            font-size: 13px;
         }
-        .panel input[type="color"] {
+        .grupo input[type="color"] {
             width: 50px;
-            height: 35px;
+            height: 32px;
             padding: 2px;
         }
+        .grupo input[type="range"] {
+            width: 100px;
+        }
+        .grupo input[type="file"] {
+            font-size: 11px;
+            max-width: 130px;
+        }
+        /* Galería */
         .galeria {
             display: grid;
             gap: 15px;
@@ -60,9 +73,7 @@
             margin: 0 auto;
             grid-template-columns: repeat(3, 1fr);
         }
-        .galeria.grande {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        .galeria.grande { grid-template-columns: repeat(2, 1fr); }
         .galeria img {
             width: 100%;
             height: 200px;
@@ -70,8 +81,8 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             cursor: pointer;
             transition: transform 0.2s;
+            border-radius: 10px;
         }
-        .galeria.cuadricula img { border-radius: 10px; }
         .galeria.circulos img {
             border-radius: 50%;
             height: 200px;
@@ -83,6 +94,50 @@
             height: 280px;
         }
         .galeria img:hover { transform: scale(1.05); }
+        /* Paginación */
+        .paginacion {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 25px auto;
+            flex-wrap: wrap;
+            max-width: 900px;
+        }
+        .paginacion button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.7);
+            color: #8B4513;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .paginacion button.activo {
+            background: #8B4513;
+            color: white;
+        }
+        .paginacion button:hover { background: #d4956a; color: white; }
+        /* Botón ver más */
+        .btn-ver-mas {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 12px;
+            background: #8B4513;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-ver-mas:hover { background: #a0522d; }
+        /* Ordenar arrastrar */
+        .galeria img.dragging { opacity: 0.4; transform: scale(0.95); }
+        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -122,6 +177,13 @@
         }
         .anterior { left: 20px; }
         .siguiente { right: 20px; }
+        /* Separador secciones panel */
+        .separador {
+            width: 1px;
+            height: 60px;
+            background: rgba(0,0,0,0.15);
+            margin: 0 5px;
+        }
     </style>
 </head>
 <body>
@@ -129,23 +191,50 @@
 <h1 id="titulo">📷 Mis Fotos Familiares</h1>
 
 <div class="panel">
+
+    <!-- TÍTULO -->
     <div class="grupo">
-        <label>Color del título</label>
+        <label>Color título</label>
         <input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()">
     </div>
     <div class="grupo">
-        <label>Fuente del título</label>
+        <label>Tamaño título</label>
+        <input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="cambiarTamano()">
+    </div>
+    <div class="grupo">
+        <label>Fuente</label>
         <select id="fuenteTitulo" onchange="cambiarFuente()">
             <option value="Arial">Arial</option>
             <option value="Georgia">Georgia</option>
+            <option value="Pacifico">Pacifico</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Lobster">Lobster</option>
+            <option value="Raleway">Raleway</option>
+            <option value="Oswald">Oswald</option>
+            <option value="Caveat">Caveat</option>
             <option value="Courier New">Courier New</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Verdana">Verdana</option>
             <option value="Impact">Impact</option>
+            <option value="Times New Roman">Times New Roman</option>
         </select>
     </div>
     <div class="grupo">
-        <label>Forma de las fotos</label>
+        <label>Diseño título</label>
+        <select id="disenoTitulo" onchange="cambiarDiseno()">
+            <option value="normal">Normal</option>
+            <option value="sombra">Con sombra</option>
+            <option value="subrayado">Subrayado</option>
+            <option value="mayusculas">MAYÚSCULAS</option>
+            <option value="espaciado">E S P A C I A D O</option>
+        </select>
+    </div>
+
+    <div class="separador"></div>
+
+    <!-- FOTOS -->
+    <div class="grupo">
+        <label>Forma fotos</label>
         <select id="formaFotos" onchange="cambiarForma()">
             <option value="cuadricula">Cuadrícula</option>
             <option value="circulos">Círculos</option>
@@ -153,7 +242,44 @@
         </select>
     </div>
     <div class="grupo">
-        <label>Tipo de fondo</label>
+        <label>Fotos por página</label>
+        <select id="fotosPorPagina" onchange="cambiarFotosPorPagina()">
+            <option value="6">6 fotos</option>
+            <option value="9" selected>9 fotos</option>
+            <option value="12">12 fotos</option>
+            <option value="15">15 fotos</option>
+        </select>
+    </div>
+    <div class="grupo">
+        <label>Ordenar por</label>
+        <select id="ordenFotos" onchange="ordenarFotos()">
+            <option value="original">Original</option>
+            <option value="az">Nombre A-Z</option>
+            <option value="za">Nombre Z-A</option>
+            <option value="nuevas">Más nuevas</option>
+            <option value="antiguas">Más antiguas</option>
+        </select>
+    </div>
+    <div class="grupo">
+        <label>Modo vista</label>
+        <select id="modoVista" onchange="cambiarModoVista()">
+            <option value="paginas">Páginas</option>
+            <option value="vermas">Ver más</option>
+        </select>
+    </div>
+    <div class="grupo">
+        <label>🔀 Arrastrar fotos</label>
+        <select id="modoArrastrar" onchange="toggleArrastrar()">
+            <option value="no">Desactivado</option>
+            <option value="si">Activado</option>
+        </select>
+    </div>
+
+    <div class="separador"></div>
+
+    <!-- FONDO -->
+    <div class="grupo">
+        <label>Tipo fondo</label>
         <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
             <option value="degradado">Degradado</option>
             <option value="solido">Color sólido</option>
@@ -167,17 +293,21 @@
         <input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()">
     </div>
     <div class="grupo" id="grupoSolido" style="display:none">
-        <label>Color de fondo</label>
+        <label>Color fondo</label>
         <input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()">
     </div>
     <div class="grupo" id="grupoImagen" style="display:none">
-        <label>Subir imagen de fondo</label>
+        <label>Imagen de fondo</label>
         <input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()">
     </div>
+
 </div>
 
 <div class="galeria cuadricula" id="galeria"></div>
+<div class="paginacion" id="paginacion"></div>
+<button class="btn-ver-mas" id="btnVerMas" style="display:none" onclick="verMas()">Ver más fotos ▼</button>
 
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
     <span class="cerrar" onclick="cerrarLightbox()">✕</span>
     <span class="anterior" onclick="cambiarFoto(-1)">&#10094;</span>
@@ -186,62 +316,190 @@
 </div>
 
 <script>
-    let fotos = [];
+    let fotosOriginal = [];
+    let fotosActuales = [];
     let fotoActual = 0;
+    let paginaActual = 1;
+    let fotosPorPagina = 9;
+    let fotosVisibles = 9;
+    let modoVista = "paginas";
+    let arrastrarActivo = false;
+    let draggingEl = null;
 
-    // Lee las fotos desde fotos.json automáticamente
     fetch('fotos.json')
         .then(res => res.json())
         .then(data => {
-            fotos = data;
-            cargarGaleria();
-        })
-        .catch(() => {
-            document.getElementById("galeria").innerHTML = "<p style='text-align:center'>No se encontró fotos.json</p>";
+            fotosOriginal = data;
+            fotosActuales = [...data];
+            renderizar();
         });
 
-    function cargarGaleria() {
+    function renderizar() {
         const galeria = document.getElementById("galeria");
         galeria.innerHTML = "";
-        fotos.forEach((foto, index) => {
+
+        let fotosAMostrar = [];
+        if (modoVista === "paginas") {
+            const inicio = (paginaActual - 1) * fotosPorPagina;
+            fotosAMostrar = fotosActuales.slice(inicio, inicio + fotosPorPagina);
+        } else {
+            fotosAMostrar = fotosActuales.slice(0, fotosVisibles);
+        }
+
+        fotosAMostrar.forEach((foto, i) => {
             const img = document.createElement("img");
             img.src = foto;
-            img.alt = "Foto familiar " + (index + 1);
-            img.onclick = () => abrirLightbox(index);
+            img.alt = "Foto " + (i + 1);
+            const indexReal = modoVista === "paginas"
+                ? (paginaActual - 1) * fotosPorPagina + i
+                : i;
+            img.onclick = () => { if (!arrastrarActivo) abrirLightbox(indexReal); };
+            if (arrastrarActivo) configurarArrastrar(img, indexReal);
             galeria.appendChild(img);
+        });
+
+        if (modoVista === "paginas") {
+            renderizarPaginacion();
+            document.getElementById("btnVerMas").style.display = "none";
+        } else {
+            document.getElementById("paginacion").innerHTML = "";
+            const hayMas = fotosVisibles < fotosActuales.length;
+            document.getElementById("btnVerMas").style.display = hayMas ? "block" : "none";
+        }
+    }
+
+    function renderizarPaginacion() {
+        const total = Math.ceil(fotosActuales.length / fotosPorPagina);
+        const pag = document.getElementById("paginacion");
+        pag.innerHTML = "";
+        if (total <= 1) return;
+
+        const anterior = document.createElement("button");
+        anterior.textContent = "◀";
+        anterior.onclick = () => { if (paginaActual > 1) { paginaActual--; renderizar(); } };
+        pag.appendChild(anterior);
+
+        for (let i = 1; i <= total; i++) {
+            const btn = document.createElement("button");
+            btn.textContent = i;
+            if (i === paginaActual) btn.classList.add("activo");
+            btn.onclick = ((p) => () => { paginaActual = p; renderizar(); })(i);
+            pag.appendChild(btn);
+        }
+
+        const siguiente = document.createElement("button");
+        siguiente.textContent = "▶";
+        siguiente.onclick = () => { if (paginaActual < total) { paginaActual++; renderizar(); } };
+        pag.appendChild(siguiente);
+    }
+
+    function verMas() {
+        fotosVisibles += fotosPorPagina;
+        renderizar();
+    }
+
+    function cambiarFotosPorPagina() {
+        fotosPorPagina = parseInt(document.getElementById("fotosPorPagina").value);
+        fotosVisibles = fotosPorPagina;
+        paginaActual = 1;
+        renderizar();
+    }
+
+    function cambiarModoVista() {
+        modoVista = document.getElementById("modoVista").value;
+        paginaActual = 1;
+        fotosVisibles = fotosPorPagina;
+        renderizar();
+    }
+
+    function ordenarFotos() {
+        const orden = document.getElementById("ordenFotos").value;
+        if (orden === "original") fotosActuales = [...fotosOriginal];
+        else if (orden === "az") fotosActuales = [...fotosOriginal].sort();
+        else if (orden === "za") fotosActuales = [...fotosOriginal].sort().reverse();
+        else if (orden === "nuevas") fotosActuales = [...fotosOriginal].reverse();
+        else if (orden === "antiguas") fotosActuales = [...fotosOriginal];
+        paginaActual = 1;
+        renderizar();
+    }
+
+    // Arrastrar para ordenar
+    function toggleArrastrar() {
+        arrastrarActivo = document.getElementById("modoArrastrar").value === "si";
+        renderizar();
+    }
+
+    function configurarArrastrar(img, index) {
+        img.draggable = true;
+        img.style.cursor = "grab";
+        img.addEventListener("dragstart", (e) => {
+            draggingEl = img;
+            img.classList.add("dragging");
+            e.dataTransfer.setData("text/plain", index);
+        });
+        img.addEventListener("dragend", () => img.classList.remove("dragging"));
+        img.addEventListener("dragover", (e) => e.preventDefault());
+        img.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const fromIndex = parseInt(e.dataTransfer.getData("text/plain"));
+            const toIndex = index;
+            if (fromIndex !== toIndex) {
+                const temp = fotosActuales[fromIndex];
+                fotosActuales[fromIndex] = fotosActuales[toIndex];
+                fotosActuales[toIndex] = temp;
+                fotosOriginal = [...fotosActuales];
+                renderizar();
+            }
         });
     }
 
+    // Lightbox
     function abrirLightbox(index) {
         fotoActual = index;
-        document.getElementById("lightboxImg").src = fotos[fotoActual];
+        document.getElementById("lightboxImg").src = fotosActuales[fotoActual];
         document.getElementById("lightbox").classList.add("activo");
     }
-
     function cerrarLightbox() {
         document.getElementById("lightbox").classList.remove("activo");
     }
-
     function cambiarFoto(dir) {
         fotoActual += dir;
-        if (fotoActual < 0) fotoActual = fotos.length - 1;
-        if (fotoActual >= fotos.length) fotoActual = 0;
-        document.getElementById("lightboxImg").src = fotos[fotoActual];
+        if (fotoActual < 0) fotoActual = fotosActuales.length - 1;
+        if (fotoActual >= fotosActuales.length) fotoActual = 0;
+        document.getElementById("lightboxImg").src = fotosActuales[fotoActual];
     }
 
+    // Título
     function cambiarColor() {
         document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value;
     }
-
+    function cambiarTamano() {
+        const val = document.getElementById("tamanoTitulo").value;
+        document.getElementById("titulo").style.fontSize = val + "px";
+    }
     function cambiarFuente() {
         document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value;
     }
+    function cambiarDiseno() {
+        const titulo = document.getElementById("titulo");
+        const diseno = document.getElementById("disenoTitulo").value;
+        titulo.style.textShadow = "";
+        titulo.style.textDecoration = "";
+        titulo.style.textTransform = "";
+        titulo.style.letterSpacing = "";
+        if (diseno === "sombra") titulo.style.textShadow = "3px 3px 6px rgba(0,0,0,0.4)";
+        else if (diseno === "subrayado") titulo.style.textDecoration = "underline";
+        else if (diseno === "mayusculas") titulo.style.textTransform = "uppercase";
+        else if (diseno === "espaciado") titulo.style.letterSpacing = "8px";
+    }
 
+    // Forma fotos
     function cambiarForma() {
         const galeria = document.getElementById("galeria");
         galeria.className = "galeria " + document.getElementById("formaFotos").value;
     }
 
+    // Fondo
     function mostrarOpcionesFondo() {
         const tipo = document.getElementById("tipoFondo").value;
         document.getElementById("grupoDegradado").style.display = tipo === "degradado" ? "flex" : "none";
@@ -250,17 +508,14 @@
         if (tipo === "degradado") aplicarDegradado();
         if (tipo === "solido") aplicarSolido();
     }
-
     function aplicarDegradado() {
         const c1 = document.getElementById("color1").value;
         const c2 = document.getElementById("color2").value;
         document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
     }
-
     function aplicarSolido() {
         document.body.style.background = document.getElementById("colorSolido").value;
     }
-
     function aplicarImagenFondo() {
         const archivo = document.getElementById("imagenFondo").files[0];
         if (!archivo) return;
