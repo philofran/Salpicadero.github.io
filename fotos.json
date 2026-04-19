@@ -1,26 +1,24 @@
-[
-  "foto1.jpg",
-  "foto2.jpg",
-  "foto3.jpg",
-  "foto4.jpg",
-  "foto5.jpg",
-  "foto6.jpg",
-  "foto7.jpg",
-  "foto8.jpg",
-  "foto9.jpg",
-  "foto10.jpg",
-  "IMG_20241103_154711.jpg",
-  "IMG_20241103_154724.jpg",
-  "IMG_20241103_154725.jpg",
-  "IMG_20241103_154726.jpg",
-  "IMG_20241103_154759.jpg",
-  "IMG_20241103_154800.jpg",
-  "IMG_20241103_154800_1.jpg",
-  "IMG_20241103_154802.jpg",
-  "IMG_20241103_154822.jpg",
-  "IMG_20241103_154726_1.jpg",
-  "IMG_20241103_154823.jpg",
-  "IMG_20241103_154824.jpg",
-  "IMG_20241103_154825.jpg"
-
-]
+{
+  "escritorio": [
+    "foto1.jpg",
+    "foto2.jpg",
+    "foto3.jpg",
+    "foto4.jpg",
+    "foto5.jpg"
+  ],
+  "carpetas": {
+    "Cumpleaños": [
+      "foto6.jpg",
+      "foto7.jpg",
+      "foto8.jpg",
+      "IMG_20241103_154711.jpg",
+      "IMG_20241103_154724.jpg"
+    ],
+    "Reuniones familiares": [
+      "foto9.jpg",
+      "foto10.jpg",
+      "IMG_20241103_154725.jpg",
+      "IMG_20241103_154726.jpg"
+    ]
+  }
+}
