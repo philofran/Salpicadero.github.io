@@ -1,15 +1,15 @@
 {
   "titulo": {
     "texto": "📷 Mis Fotos Familiares",
-    "color": "#8B4513",
+    "color": "#8b4513",
     "tamano": "36",
-    "fuente": "Arial",
+    "fuente": "Courier New",
     "diseno": "normal"
   },
   "fondo": {
     "tipo": "degradado",
-    "color1": "#ffecd2",
-    "color2": "#fcb69f",
+    "color1": "#ddab64",
+    "color2": "#a48479",
     "colorSolido": "#ffecd2"
   },
   "fotos": {
