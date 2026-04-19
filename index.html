@@ -6,12 +6,11 @@
     <title>Mis Fotos Familiares</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Lobster&family=Raleway:wght@700&family=Oswald:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
             min-height: 100vh;
+            padding: 20px;
             background: linear-gradient(135deg, #ffecd2, #fcb69f);
             transition: background 0.5s;
         }
@@ -19,515 +18,699 @@
             text-align: center;
             color: #8B4513;
             font-size: 36px;
-            margin-bottom: 15px;
+            margin: 15px 0;
             transition: all 0.3s;
         }
-        /* Panel de controles */
+
+        /* ── PANEL ── */
         .panel {
-            background: rgba(255,255,255,0.6);
             border-radius: 15px;
-            padding: 15px 20px;
-            max-width: 950px;
+            padding: 12px 16px;
+            max-width: 1000px;
             margin: 0 auto 20px auto;
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
             align-items: flex-end;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transition: background 0.4s;
+        }
+        .seccion-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 6px 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.3);
         }
         .grupo {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .grupo label {
             font-weight: bold;
-            font-size: 12px;
-            color: #555;
+            font-size: 11px;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .grupo select, .grupo input[type="color"], .grupo input[type="range"] {
+        .grupo select,
+        .grupo input[type="color"],
+        .grupo input[type="range"] {
             padding: 4px 6px;
-            border-radius: 8px;
+            border-radius: 7px;
             border: 1px solid #ccc;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
+            background: white;
         }
-        .grupo input[type="color"] {
-            width: 50px;
-            height: 32px;
-            padding: 2px;
+        .grupo input[type="color"] { width: 46px; height: 30px; padding: 2px; }
+        .grupo input[type="range"] { width: 90px; }
+        .grupo input[type="file"] { font-size: 11px; max-width: 130px; }
+        .sep { width: 1px; height: 55px; background: rgba(0,0,0,0.12); margin: 0 4px; }
+
+        /* ── TABS ÁLBUMES ── */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-width: 900px;
+            margin: 0 auto 15px auto;
+            justify-content: center;
         }
-        .grupo input[type="range"] {
-            width: 100px;
+        .tab {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 2px solid #8B4513;
+            background: white;
+            color: #8B4513;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
         }
-        .grupo input[type="file"] {
-            font-size: 11px;
-            max-width: 130px;
+        .tab.activo, .tab:hover {
+            background: #8B4513;
+            color: white;
         }
-        /* Galería */
+
+        /* ── GALERÍA ── */
         .galeria {
             display: grid;
-            gap: 15px;
+            gap: 14px;
             max-width: 900px;
             margin: 0 auto;
             grid-template-columns: repeat(3, 1fr);
+            transition: all 0.3s;
         }
         .galeria.grande { grid-template-columns: repeat(2, 1fr); }
+        .galeria.circulos img {
+            border-radius: 50% !important;
+            height: 190px !important;
+            width: 190px !important;
+            justify-self: center;
+        }
         .galeria img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: transform 0.2s;
             border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .galeria.circulos img {
-            border-radius: 50%;
-            height: 200px;
-            width: 200px;
-            justify-self: center;
+        .galeria.grande img { height: 270px; border-radius: 14px; }
+        .galeria img:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
-        .galeria.grande img {
-            border-radius: 15px;
-            height: 280px;
-        }
-        .galeria img:hover { transform: scale(1.05); }
-        /* Paginación */
+        .galeria img.dragging { opacity: 0.3; transform: scale(0.95); }
+
+        /* ── PAGINACIÓN ── */
         .paginacion {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
-            margin: 25px auto;
+            gap: 6px;
+            margin: 20px auto;
             flex-wrap: wrap;
             max-width: 900px;
         }
         .paginacion button {
-            padding: 8px 14px;
+            padding: 7px 13px;
             border: none;
             border-radius: 8px;
             background: rgba(255,255,255,0.7);
             color: #8B4513;
             font-weight: bold;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             transition: background 0.2s;
         }
-        .paginacion button.activo {
-            background: #8B4513;
-            color: white;
-        }
-        .paginacion button:hover { background: #d4956a; color: white; }
-        /* Botón ver más */
+        .paginacion button.activo { background: #8B4513; color: white; }
+        .paginacion button:hover { background: #c8784a; color: white; }
+
+        /* ── VER MÁS ── */
         .btn-ver-mas {
-            display: block;
-            margin: 20px auto;
-            padding: 12px 30px;
+            display: none;
+            margin: 18px auto;
+            padding: 11px 28px;
             border: none;
             border-radius: 12px;
             background: #8B4513;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.2s;
         }
         .btn-ver-mas:hover { background: #a0522d; }
-        /* Ordenar arrastrar */
-        .galeria img.dragging { opacity: 0.4; transform: scale(0.95); }
-        /* Lightbox */
+
+        /* ── LIGHTBOX ── */
         .lightbox {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.88);
+            inset: 0;
+            background: rgba(0,0,0,0.9);
             justify-content: center;
             align-items: center;
-            z-index: 999;
+            z-index: 9999;
         }
         .lightbox.activo { display: flex; }
         .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 92%;
+            max-height: 92%;
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+            box-shadow: 0 0 40px rgba(255,255,255,0.2);
         }
         .cerrar {
             position: absolute;
-            top: 20px; right: 30px;
-            font-size: 40px;
+            top: 18px; right: 26px;
+            font-size: 38px;
             color: white;
             cursor: pointer;
             font-weight: bold;
+            line-height: 1;
         }
-        .anterior, .siguiente {
+        .nav-lb {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 50px;
+            font-size: 46px;
             color: white;
             cursor: pointer;
-            background: rgba(0,0,0,0.4);
-            padding: 10px 18px;
+            background: rgba(0,0,0,0.35);
+            padding: 10px 16px;
             border-radius: 50%;
             user-select: none;
+            transition: background 0.2s;
         }
-        .anterior { left: 20px; }
-        .siguiente { right: 20px; }
-        /* Separador secciones panel */
-        .separador {
-            width: 1px;
-            height: 60px;
-            background: rgba(0,0,0,0.15);
-            margin: 0 5px;
+        .nav-lb:hover { background: rgba(0,0,0,0.6); }
+        .nav-lb.izq { left: 18px; }
+        .nav-lb.der { right: 18px; }
+
+        /* ── MODAL ÁLBUM ── */
+        .modal-album {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 8000;
+            justify-content: center;
+            align-items: center;
         }
+        .modal-album.activo { display: flex; }
+        .modal-album-contenido {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            max-width: 860px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-album-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .modal-album-header h2 { color: #8B4513; font-size: 22px; }
+        .modal-album-header .cerrar-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: #888;
+            font-weight: bold;
+        }
+        .modal-album-header .cerrar-modal:hover { color: #333; }
+        .galeria-modal {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .galeria-modal img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        .galeria-modal img:hover { transform: scale(1.04); }
     </style>
 </head>
 <body>
 
 <h1 id="titulo">📷 Mis Fotos Familiares</h1>
 
-<div class="panel">
+<!-- ══ PANEL DE HERRAMIENTAS ══ -->
+<div class="panel" id="panel">
 
     <!-- TÍTULO -->
-    <div class="grupo">
-        <label>Color título</label>
-        <input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()">
-    </div>
-    <div class="grupo">
-        <label>Tamaño título</label>
-        <input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="cambiarTamano()">
-    </div>
-    <div class="grupo">
-        <label>Fuente</label>
-        <select id="fuenteTitulo" onchange="cambiarFuente()">
-            <option value="Arial">Arial</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Pacifico">Pacifico</option>
-            <option value="Dancing Script">Dancing Script</option>
-            <option value="Playfair Display">Playfair Display</option>
-            <option value="Montserrat">Montserrat</option>
-            <option value="Lobster">Lobster</option>
-            <option value="Raleway">Raleway</option>
-            <option value="Oswald">Oswald</option>
-            <option value="Caveat">Caveat</option>
-            <option value="Courier New">Courier New</option>
-            <option value="Impact">Impact</option>
-            <option value="Times New Roman">Times New Roman</option>
-        </select>
-    </div>
-    <div class="grupo">
-        <label>Diseño título</label>
-        <select id="disenoTitulo" onchange="cambiarDiseno()">
-            <option value="normal">Normal</option>
-            <option value="sombra">Con sombra</option>
-            <option value="subrayado">Subrayado</option>
-            <option value="mayusculas">MAYÚSCULAS</option>
-            <option value="espaciado">E S P A C I A D O</option>
-        </select>
+    <div class="seccion-panel">
+        <div class="grupo">
+            <label>Color título</label>
+            <input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()">
+        </div>
+        <div class="grupo">
+            <label>Tamaño</label>
+            <input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="cambiarTamano()">
+        </div>
+        <div class="grupo">
+            <label>Fuente</label>
+            <select id="fuenteTitulo" onchange="cambiarFuente()">
+                <option value="Arial">Arial</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Pacifico">Pacifico</option>
+                <option value="Dancing Script">Dancing Script</option>
+                <option value="Playfair Display">Playfair Display</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Lobster">Lobster</option>
+                <option value="Raleway">Raleway</option>
+                <option value="Oswald">Oswald</option>
+                <option value="Caveat">Caveat</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Impact">Impact</option>
+            </select>
+        </div>
+        <div class="grupo">
+            <label>Diseño</label>
+            <select id="disenoTitulo" onchange="cambiarDiseno()">
+                <option value="normal">Normal</option>
+                <option value="sombra">Con sombra</option>
+                <option value="subrayado">Subrayado</option>
+                <option value="mayusculas">MAYÚSCULAS</option>
+                <option value="espaciado">E S P A C I A D O</option>
+            </select>
+        </div>
     </div>
 
-    <div class="separador"></div>
+    <div class="sep"></div>
 
     <!-- FOTOS -->
-    <div class="grupo">
-        <label>Forma fotos</label>
-        <select id="formaFotos" onchange="cambiarForma()">
-            <option value="cuadricula">Cuadrícula</option>
-            <option value="circulos">Círculos</option>
-            <option value="grande">Cuadros grandes</option>
-        </select>
-    </div>
-    <div class="grupo">
-        <label>Fotos por página</label>
-        <select id="fotosPorPagina" onchange="cambiarFotosPorPagina()">
-            <option value="6">6 fotos</option>
-            <option value="9" selected>9 fotos</option>
-            <option value="12">12 fotos</option>
-            <option value="15">15 fotos</option>
-        </select>
-    </div>
-    <div class="grupo">
-        <label>Ordenar por</label>
-        <select id="ordenFotos" onchange="ordenarFotos()">
-            <option value="original">Original</option>
-            <option value="az">Nombre A-Z</option>
-            <option value="za">Nombre Z-A</option>
-            <option value="nuevas">Más nuevas</option>
-            <option value="antiguas">Más antiguas</option>
-        </select>
-    </div>
-    <div class="grupo">
-        <label>Modo vista</label>
-        <select id="modoVista" onchange="cambiarModoVista()">
-            <option value="paginas">Páginas</option>
-            <option value="vermas">Ver más</option>
-        </select>
-    </div>
-    <div class="grupo">
-        <label>🔀 Arrastrar fotos</label>
-        <select id="modoArrastrar" onchange="toggleArrastrar()">
-            <option value="no">Desactivado</option>
-            <option value="si">Activado</option>
-        </select>
+    <div class="seccion-panel">
+        <div class="grupo">
+            <label>Forma</label>
+            <select id="formaFotos" onchange="cambiarForma()">
+                <option value="cuadricula">Cuadrícula</option>
+                <option value="circulos">Círculos</option>
+                <option value="grande">Cuadros grandes</option>
+            </select>
+        </div>
+        <div class="grupo">
+            <label>Fotos/página</label>
+            <select id="fotosPorPagina" onchange="cambiarFotosPorPagina()">
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="9" selected>9</option>
+                <option value="12">12</option>
+            </select>
+        </div>
+        <div class="grupo">
+            <label>Ordenar</label>
+            <select id="ordenFotos" onchange="ordenarFotos()">
+                <option value="original">Original</option>
+                <option value="az">A → Z</option>
+                <option value="za">Z → A</option>
+                <option value="nuevas">Más nuevas</option>
+                <option value="antiguas">Más antiguas</option>
+            </select>
+        </div>
+        <div class="grupo">
+            <label>Vista</label>
+            <select id="modoVista" onchange="cambiarModoVista()">
+                <option value="paginas">Páginas</option>
+                <option value="vermas">Ver más</option>
+            </select>
+        </div>
+        <div class="grupo">
+            <label>Arrastrar</label>
+            <select id="modoArrastrar" onchange="toggleArrastrar()">
+                <option value="no">Off</option>
+                <option value="si">On</option>
+            </select>
+        </div>
     </div>
 
-    <div class="separador"></div>
+    <div class="sep"></div>
 
-    <!-- FONDO -->
-    <div class="grupo">
-        <label>Tipo fondo</label>
-        <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
-            <option value="degradado">Degradado</option>
-            <option value="solido">Color sólido</option>
-            <option value="imagen">Mi imagen</option>
-        </select>
-    </div>
-    <div class="grupo" id="grupoDegradado">
-        <label>Color 1</label>
-        <input type="color" id="color1" value="#ffecd2" onchange="aplicarDegradado()">
-        <label>Color 2</label>
-        <input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()">
-    </div>
-    <div class="grupo" id="grupoSolido" style="display:none">
-        <label>Color fondo</label>
-        <input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()">
-    </div>
-    <div class="grupo" id="grupoImagen" style="display:none">
-        <label>Imagen de fondo</label>
-        <input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()">
+    <!-- FONDO + PANEL -->
+    <div class="seccion-panel">
+        <div class="grupo">
+            <label>Tipo fondo</label>
+            <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
+                <option value="degradado">Degradado</option>
+                <option value="solido">Sólido</option>
+                <option value="imagen">Mi imagen</option>
+            </select>
+        </div>
+        <div class="grupo" id="grupoDegradado">
+            <label>Color 1</label>
+            <input type="color" id="color1" value="#ffecd2" onchange="aplicarDegradado()">
+            <label>Color 2</label>
+            <input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()">
+        </div>
+        <div class="grupo" id="grupoSolido" style="display:none">
+            <label>Color fondo</label>
+            <input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()">
+        </div>
+        <div class="grupo" id="grupoImagen" style="display:none">
+            <label>Imagen fondo</label>
+            <input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()">
+        </div>
+        <div class="grupo">
+            <label>Color panel</label>
+            <input type="color" id="colorPanel" value="#ffffff" onchange="cambiarColorPanel()">
+        </div>
+        <div class="grupo">
+            <label>Opacidad panel</label>
+            <input type="range" id="opacidadPanel" min="10" max="100" value="55" oninput="cambiarColorPanel()">
+        </div>
     </div>
 
 </div>
 
+<!-- ══ TABS ÁLBUMES ══ -->
+<div class="tabs" id="tabs"></div>
+
+<!-- ══ GALERÍA PRINCIPAL ══ -->
 <div class="galeria cuadricula" id="galeria"></div>
 <div class="paginacion" id="paginacion"></div>
-<button class="btn-ver-mas" id="btnVerMas" style="display:none" onclick="verMas()">Ver más fotos ▼</button>
+<button class="btn-ver-mas" id="btnVerMas" onclick="verMas()">Ver más fotos ▼</button>
 
-<!-- Lightbox -->
+<!-- ══ MODAL ÁLBUM ══ -->
+<div class="modal-album" id="modalAlbum">
+    <div class="modal-album-contenido">
+        <div class="modal-album-header">
+            <h2 id="modalAlbumTitulo">Álbum</h2>
+            <span class="cerrar-modal" onclick="cerrarModalAlbum()">✕</span>
+        </div>
+        <div class="galeria-modal" id="galeriaModal"></div>
+    </div>
+</div>
+
+<!-- ══ LIGHTBOX ══ -->
 <div class="lightbox" id="lightbox">
     <span class="cerrar" onclick="cerrarLightbox()">✕</span>
-    <span class="anterior" onclick="cambiarFoto(-1)">&#10094;</span>
-    <img id="lightboxImg" src="" alt="Foto ampliada">
-    <span class="siguiente" onclick="cambiarFoto(1)">&#10095;</span>
+    <span class="nav-lb izq" onclick="cambiarFoto(-1)">&#10094;</span>
+    <img id="lightboxImg" src="" alt="Foto">
+    <span class="nav-lb der" onclick="cambiarFoto(1)">&#10095;</span>
 </div>
 
 <script>
-    let fotosOriginal = [];
-    let fotosActuales = [];
-    let fotoActual = 0;
-    let paginaActual = 1;
-    let fotosPorPagina = 9;
-    let fotosVisibles = 9;
-    let modoVista = "paginas";
-    let arrastrarActivo = false;
-    let draggingEl = null;
+// ══════════════════════════════════════════
+// CONFIGURA TUS ÁLBUMES AQUÍ
+// Cada álbum tiene un nombre y sus fotos
+// ══════════════════════════════════════════
+const albums = {
+    "Todas": null, // null = carga desde fotos.json
+    "Cumpleaños": [
+        "foto1.jpg",
+        "foto2.jpg",
+        "foto3.jpg"
+    ],
+    "Reuniones": [
+        "foto4.jpg",
+        "foto5.jpg",
+        "foto6.jpg"
+    ]
+};
+// ══════════════════════════════════════════
 
-    fetch('fotos.json')
-        .then(res => res.json())
-        .then(data => {
-            fotosOriginal = data;
-            fotosActuales = [...data];
-            renderizar();
-        });
+let fotosOriginal = [];
+let fotosActuales = [];
+let albumActual = "Todas";
+let fotosLightbox = [];
+let fotoActual = 0;
+let paginaActual = 1;
+let fotosPorPagina = 9;
+let fotosVisibles = 9;
+let modoVista = "paginas";
+let arrastrarActivo = false;
 
-    function renderizar() {
-        const galeria = document.getElementById("galeria");
-        galeria.innerHTML = "";
-
-        let fotosAMostrar = [];
-        if (modoVista === "paginas") {
-            const inicio = (paginaActual - 1) * fotosPorPagina;
-            fotosAMostrar = fotosActuales.slice(inicio, inicio + fotosPorPagina);
-        } else {
-            fotosAMostrar = fotosActuales.slice(0, fotosVisibles);
-        }
-
-        fotosAMostrar.forEach((foto, i) => {
-            const img = document.createElement("img");
-            img.src = foto;
-            img.alt = "Foto " + (i + 1);
-            const indexReal = modoVista === "paginas"
-                ? (paginaActual - 1) * fotosPorPagina + i
-                : i;
-            img.onclick = () => { if (!arrastrarActivo) abrirLightbox(indexReal); };
-            if (arrastrarActivo) configurarArrastrar(img, indexReal);
-            galeria.appendChild(img);
-        });
-
-        if (modoVista === "paginas") {
-            renderizarPaginacion();
-            document.getElementById("btnVerMas").style.display = "none";
-        } else {
-            document.getElementById("paginacion").innerHTML = "";
-            const hayMas = fotosVisibles < fotosActuales.length;
-            document.getElementById("btnVerMas").style.display = hayMas ? "block" : "none";
-        }
-    }
-
-    function renderizarPaginacion() {
-        const total = Math.ceil(fotosActuales.length / fotosPorPagina);
-        const pag = document.getElementById("paginacion");
-        pag.innerHTML = "";
-        if (total <= 1) return;
-
-        const anterior = document.createElement("button");
-        anterior.textContent = "◀";
-        anterior.onclick = () => { if (paginaActual > 1) { paginaActual--; renderizar(); } };
-        pag.appendChild(anterior);
-
-        for (let i = 1; i <= total; i++) {
-            const btn = document.createElement("button");
-            btn.textContent = i;
-            if (i === paginaActual) btn.classList.add("activo");
-            btn.onclick = ((p) => () => { paginaActual = p; renderizar(); })(i);
-            pag.appendChild(btn);
-        }
-
-        const siguiente = document.createElement("button");
-        siguiente.textContent = "▶";
-        siguiente.onclick = () => { if (paginaActual < total) { paginaActual++; renderizar(); } };
-        pag.appendChild(siguiente);
-    }
-
-    function verMas() {
-        fotosVisibles += fotosPorPagina;
+// Cargar fotos.json
+fetch('fotos.json')
+    .then(r => r.json())
+    .then(data => {
+        fotosOriginal = data;
+        fotosActuales = [...data];
+        crearTabs();
         renderizar();
-    }
-
-    function cambiarFotosPorPagina() {
-        fotosPorPagina = parseInt(document.getElementById("fotosPorPagina").value);
-        fotosVisibles = fotosPorPagina;
-        paginaActual = 1;
-        renderizar();
-    }
-
-    function cambiarModoVista() {
-        modoVista = document.getElementById("modoVista").value;
-        paginaActual = 1;
-        fotosVisibles = fotosPorPagina;
-        renderizar();
-    }
-
-    function ordenarFotos() {
-        const orden = document.getElementById("ordenFotos").value;
-        if (orden === "original") fotosActuales = [...fotosOriginal];
-        else if (orden === "az") fotosActuales = [...fotosOriginal].sort();
-        else if (orden === "za") fotosActuales = [...fotosOriginal].sort().reverse();
-        else if (orden === "nuevas") fotosActuales = [...fotosOriginal].reverse();
-        else if (orden === "antiguas") fotosActuales = [...fotosOriginal];
-        paginaActual = 1;
-        renderizar();
-    }
-
-    // Arrastrar para ordenar
-    function toggleArrastrar() {
-        arrastrarActivo = document.getElementById("modoArrastrar").value === "si";
-        renderizar();
-    }
-
-    function configurarArrastrar(img, index) {
-        img.draggable = true;
-        img.style.cursor = "grab";
-        img.addEventListener("dragstart", (e) => {
-            draggingEl = img;
-            img.classList.add("dragging");
-            e.dataTransfer.setData("text/plain", index);
-        });
-        img.addEventListener("dragend", () => img.classList.remove("dragging"));
-        img.addEventListener("dragover", (e) => e.preventDefault());
-        img.addEventListener("drop", (e) => {
-            e.preventDefault();
-            const fromIndex = parseInt(e.dataTransfer.getData("text/plain"));
-            const toIndex = index;
-            if (fromIndex !== toIndex) {
-                const temp = fotosActuales[fromIndex];
-                fotosActuales[fromIndex] = fotosActuales[toIndex];
-                fotosActuales[toIndex] = temp;
-                fotosOriginal = [...fotosActuales];
-                renderizar();
-            }
-        });
-    }
-
-    // Lightbox
-    function abrirLightbox(index) {
-        fotoActual = index;
-        document.getElementById("lightboxImg").src = fotosActuales[fotoActual];
-        document.getElementById("lightbox").classList.add("activo");
-    }
-    function cerrarLightbox() {
-        document.getElementById("lightbox").classList.remove("activo");
-    }
-    function cambiarFoto(dir) {
-        fotoActual += dir;
-        if (fotoActual < 0) fotoActual = fotosActuales.length - 1;
-        if (fotoActual >= fotosActuales.length) fotoActual = 0;
-        document.getElementById("lightboxImg").src = fotosActuales[fotoActual];
-    }
-
-    // Título
-    function cambiarColor() {
-        document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value;
-    }
-    function cambiarTamano() {
-        const val = document.getElementById("tamanoTitulo").value;
-        document.getElementById("titulo").style.fontSize = val + "px";
-    }
-    function cambiarFuente() {
-        document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value;
-    }
-    function cambiarDiseno() {
-        const titulo = document.getElementById("titulo");
-        const diseno = document.getElementById("disenoTitulo").value;
-        titulo.style.textShadow = "";
-        titulo.style.textDecoration = "";
-        titulo.style.textTransform = "";
-        titulo.style.letterSpacing = "";
-        if (diseno === "sombra") titulo.style.textShadow = "3px 3px 6px rgba(0,0,0,0.4)";
-        else if (diseno === "subrayado") titulo.style.textDecoration = "underline";
-        else if (diseno === "mayusculas") titulo.style.textTransform = "uppercase";
-        else if (diseno === "espaciado") titulo.style.letterSpacing = "8px";
-    }
-
-    // Forma fotos
-    function cambiarForma() {
-        const galeria = document.getElementById("galeria");
-        galeria.className = "galeria " + document.getElementById("formaFotos").value;
-    }
-
-    // Fondo
-    function mostrarOpcionesFondo() {
-        const tipo = document.getElementById("tipoFondo").value;
-        document.getElementById("grupoDegradado").style.display = tipo === "degradado" ? "flex" : "none";
-        document.getElementById("grupoSolido").style.display = tipo === "solido" ? "flex" : "none";
-        document.getElementById("grupoImagen").style.display = tipo === "imagen" ? "flex" : "none";
-        if (tipo === "degradado") aplicarDegradado();
-        if (tipo === "solido") aplicarSolido();
-    }
-    function aplicarDegradado() {
-        const c1 = document.getElementById("color1").value;
-        const c2 = document.getElementById("color2").value;
-        document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-    }
-    function aplicarSolido() {
-        document.body.style.background = document.getElementById("colorSolido").value;
-    }
-    function aplicarImagenFondo() {
-        const archivo = document.getElementById("imagenFondo").files[0];
-        if (!archivo) return;
-        const url = URL.createObjectURL(archivo);
-        document.body.style.background = `url('${url}') center/cover no-repeat fixed`;
-    }
-
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") cerrarLightbox();
-        if (e.key === "ArrowRight") cambiarFoto(1);
-        if (e.key === "ArrowLeft") cambiarFoto(-1);
     });
+
+// ── TABS ──
+function crearTabs() {
+    const tabs = document.getElementById("tabs");
+    tabs.innerHTML = "";
+    Object.keys(albums).forEach(nombre => {
+        const btn = document.createElement("button");
+        btn.className = "tab" + (nombre === albumActual ? " activo" : "");
+        btn.textContent = nombre === "Todas" ? "🏠 Todas" : "📁 " + nombre;
+        btn.onclick = () => seleccionarTab(nombre, btn);
+        tabs.appendChild(btn);
+    });
+}
+
+function seleccionarTab(nombre, btn) {
+    if (nombre !== "Todas" && albums[nombre]) {
+        // Abrir modal de álbum
+        abrirModalAlbum(nombre);
+        return;
+    }
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("activo"));
+    btn.classList.add("activo");
+    albumActual = nombre;
+    fotosActuales = [...fotosOriginal];
+    paginaActual = 1;
+    fotosVisibles = fotosPorPagina;
+    renderizar();
+}
+
+// ── MODAL ÁLBUM ──
+function abrirModalAlbum(nombre) {
+    document.getElementById("modalAlbumTitulo").textContent = "📁 " + nombre;
+    const galeriaModal = document.getElementById("galeriaModal");
+    galeriaModal.innerHTML = "";
+    const fotos = albums[nombre];
+    fotosLightbox = fotos;
+    fotos.forEach((foto, i) => {
+        const img = document.createElement("img");
+        img.src = foto;
+        img.alt = foto;
+        img.onclick = () => abrirLightbox(i, fotos);
+        galeriaModal.appendChild(img);
+    });
+    document.getElementById("modalAlbum").classList.add("activo");
+}
+
+function cerrarModalAlbum() {
+    document.getElementById("modalAlbum").classList.remove("activo");
+}
+
+// ── RENDERIZAR ──
+function renderizar() {
+    const galeria = document.getElementById("galeria");
+    galeria.innerHTML = "";
+
+    let fotosAMostrar = [];
+    if (modoVista === "paginas") {
+        const inicio = (paginaActual - 1) * fotosPorPagina;
+        fotosAMostrar = fotosActuales.slice(inicio, inicio + fotosPorPagina);
+    } else {
+        fotosAMostrar = fotosActuales.slice(0, fotosVisibles);
+    }
+
+    fotosLightbox = fotosActuales;
+
+    fotosAMostrar.forEach((foto, i) => {
+        const img = document.createElement("img");
+        img.src = foto;
+        img.alt = "Foto " + (i + 1);
+        const indexReal = modoVista === "paginas"
+            ? (paginaActual - 1) * fotosPorPagina + i
+            : i;
+        img.onclick = () => { if (!arrastrarActivo) abrirLightbox(indexReal, fotosActuales); };
+        if (arrastrarActivo) configurarArrastrar(img, indexReal);
+        galeria.appendChild(img);
+    });
+
+    if (modoVista === "paginas") {
+        renderizarPaginacion();
+        document.getElementById("btnVerMas").style.display = "none";
+    } else {
+        document.getElementById("paginacion").innerHTML = "";
+        document.getElementById("btnVerMas").style.display =
+            fotosVisibles < fotosActuales.length ? "block" : "none";
+    }
+}
+
+function renderizarPaginacion() {
+    const total = Math.ceil(fotosActuales.length / fotosPorPagina);
+    const pag = document.getElementById("paginacion");
+    pag.innerHTML = "";
+    if (total <= 1) return;
+
+    const prev = document.createElement("button");
+    prev.textContent = "◀";
+    prev.onclick = () => { if (paginaActual > 1) { paginaActual--; renderizar(); } };
+    pag.appendChild(prev);
+
+    for (let i = 1; i <= total; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        if (i === paginaActual) btn.classList.add("activo");
+        btn.onclick = ((p) => () => { paginaActual = p; renderizar(); })(i);
+        pag.appendChild(btn);
+    }
+
+    const next = document.createElement("button");
+    next.textContent = "▶";
+    next.onclick = () => { if (paginaActual < total) { paginaActual++; renderizar(); } };
+    pag.appendChild(next);
+}
+
+function verMas() {
+    fotosVisibles += fotosPorPagina;
+    renderizar();
+}
+
+// ── CONTROLES ──
+function cambiarFotosPorPagina() {
+    fotosPorPagina = parseInt(document.getElementById("fotosPorPagina").value);
+    fotosVisibles = fotosPorPagina;
+    paginaActual = 1;
+    renderizar();
+}
+function cambiarModoVista() {
+    modoVista = document.getElementById("modoVista").value;
+    paginaActual = 1;
+    fotosVisibles = fotosPorPagina;
+    renderizar();
+}
+function ordenarFotos() {
+    const orden = document.getElementById("ordenFotos").value;
+    if (orden === "original") fotosActuales = [...fotosOriginal];
+    else if (orden === "az") fotosActuales = [...fotosOriginal].sort();
+    else if (orden === "za") fotosActuales = [...fotosOriginal].sort().reverse();
+    else if (orden === "nuevas") fotosActuales = [...fotosOriginal].reverse();
+    else if (orden === "antiguas") fotosActuales = [...fotosOriginal];
+    paginaActual = 1;
+    renderizar();
+}
+function toggleArrastrar() {
+    arrastrarActivo = document.getElementById("modoArrastrar").value === "si";
+    renderizar();
+}
+function configurarArrastrar(img, index) {
+    img.draggable = true;
+    img.style.cursor = "grab";
+    img.addEventListener("dragstart", e => {
+        img.classList.add("dragging");
+        e.dataTransfer.setData("text/plain", index);
+    });
+    img.addEventListener("dragend", () => img.classList.remove("dragging"));
+    img.addEventListener("dragover", e => e.preventDefault());
+    img.addEventListener("drop", e => {
+        e.preventDefault();
+        const from = parseInt(e.dataTransfer.getData("text/plain"));
+        const to = index;
+        if (from !== to) {
+            [fotosActuales[from], fotosActuales[to]] = [fotosActuales[to], fotosActuales[from]];
+            fotosOriginal = [...fotosActuales];
+            renderizar();
+        }
+    });
+}
+
+// ── LIGHTBOX ──
+function abrirLightbox(index, listaFotos) {
+    fotoActual = index;
+    fotosLightbox = listaFotos;
+    document.getElementById("lightboxImg").src = fotosLightbox[fotoActual];
+    document.getElementById("lightbox").classList.add("activo");
+}
+function cerrarLightbox() {
+    document.getElementById("lightbox").classList.remove("activo");
+}
+function cambiarFoto(dir) {
+    fotoActual += dir;
+    if (fotoActual < 0) fotoActual = fotosLightbox.length - 1;
+    if (fotoActual >= fotosLightbox.length) fotoActual = 0;
+    document.getElementById("lightboxImg").src = fotosLightbox[fotoActual];
+}
+
+// ── TÍTULO ──
+function cambiarColor() {
+    document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value;
+}
+function cambiarTamano() {
+    document.getElementById("titulo").style.fontSize = document.getElementById("tamanoTitulo").value + "px";
+}
+function cambiarFuente() {
+    document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value;
+}
+function cambiarDiseno() {
+    const t = document.getElementById("titulo");
+    const d = document.getElementById("disenoTitulo").value;
+    t.style.cssText += ";text-shadow:none;text-decoration:none;text-transform:none;letter-spacing:normal";
+    if (d === "sombra") t.style.textShadow = "3px 3px 8px rgba(0,0,0,0.35)";
+    else if (d === "subrayado") t.style.textDecoration = "underline";
+    else if (d === "mayusculas") t.style.textTransform = "uppercase";
+    else if (d === "espaciado") t.style.letterSpacing = "10px";
+}
+
+// ── FONDO ──
+function mostrarOpcionesFondo() {
+    const tipo = document.getElementById("tipoFondo").value;
+    document.getElementById("grupoDegradado").style.display = tipo === "degradado" ? "flex" : "none";
+    document.getElementById("grupoSolido").style.display = tipo === "solido" ? "flex" : "none";
+    document.getElementById("grupoImagen").style.display = tipo === "imagen" ? "flex" : "none";
+    if (tipo === "degradado") aplicarDegradado();
+    if (tipo === "solido") aplicarSolido();
+}
+function aplicarDegradado() {
+    const c1 = document.getElementById("color1").value;
+    const c2 = document.getElementById("color2").value;
+    document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+}
+function aplicarSolido() {
+    document.body.style.background = document.getElementById("colorSolido").value;
+}
+function aplicarImagenFondo() {
+    const f = document.getElementById("imagenFondo").files[0];
+    if (!f) return;
+    document.body.style.background = `url('${URL.createObjectURL(f)}') center/cover no-repeat fixed`;
+}
+
+// ── COLOR PANEL ──
+function cambiarColorPanel() {
+    const hex = document.getElementById("colorPanel").value;
+    const op = document.getElementById("opacidadPanel").value / 100;
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    document.getElementById("panel").style.background = `rgba(${r},${g},${b},${op})`;
+}
+
+// ── FORMA ──
+function cambiarForma() {
+    document.getElementById("galeria").className = "galeria " + document.getElementById("formaFotos").value;
+}
+
+// ── TECLADO ──
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { cerrarLightbox(); cerrarModalAlbum(); }
+    if (e.key === "ArrowRight") cambiarFoto(1);
+    if (e.key === "ArrowLeft") cambiarFoto(-1);
+});
 </script>
 
 </body>
