@@ -7,95 +7,141 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Lobster&family=Raleway:wght@700&family=Oswald:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: Arial, sans-serif;
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
             background: linear-gradient(135deg, #ffecd2, #fcb69f);
             transition: background 0.5s;
         }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: rgba(139, 69, 19, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar-brand {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .navbar-menu {
+            display: flex;
+            gap: 4px;
+        }
+        .navbar-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.85);
+            font-size: 13px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+        .navbar-btn:hover, .navbar-btn.activo {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* ── DROPDOWN MENUS ── */
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            padding: 10px;
+            min-width: 220px;
+            z-index: 200;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu:hover { display: block; }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 10px;
+            border-radius: 7px;
+            font-size: 13px;
+            color: #333;
+            gap: 10px;
+        }
+        .dropdown-item:hover { background: #f5f0eb; }
+        .dropdown-item label {
+            font-size: 12px;
+            color: #666;
+            white-space: nowrap;
+        }
+        .dropdown-item select,
+        .dropdown-item input[type="color"],
+        .dropdown-item input[type="range"] {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 3px 6px;
+            font-size: 12px;
+            cursor: pointer;
+            background: white;
+        }
+        .dropdown-item input[type="color"] {
+            width: 40px; height: 28px; padding: 2px;
+        }
+        .dropdown-item input[type="range"] { width: 100px; }
+        .dropdown-item input[type="file"] { font-size: 11px; max-width: 140px; }
+        .dropdown-sep {
+            height: 1px;
+            background: #eee;
+            margin: 6px 0;
+        }
+
+        /* ── CONTENIDO ── */
+        .contenido {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        /* ── TÍTULO ── */
         h1 {
             text-align: center;
             color: #8B4513;
             font-size: 36px;
-            margin: 15px 0;
+            margin-bottom: 24px;
             transition: all 0.3s;
         }
 
-        /* ── PANEL ── */
-        .panel {
-            border-radius: 15px;
-            padding: 12px 16px;
-            max-width: 1000px;
-            margin: 0 auto 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            align-items: flex-end;
-            background: rgba(255,255,255,0.55);
-            backdrop-filter: blur(6px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-            transition: background 0.4s;
-        }
-        .seccion-panel {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 6px 10px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.3);
-        }
-        .grupo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-        }
-        .grupo label {
-            font-weight: bold;
-            font-size: 11px;
-            color: #444;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .grupo select,
-        .grupo input[type="color"],
-        .grupo input[type="range"] {
-            padding: 4px 6px;
-            border-radius: 7px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            font-size: 12px;
-            background: white;
-        }
-        .grupo input[type="color"] { width: 46px; height: 30px; padding: 2px; }
-        .grupo input[type="range"] { width: 90px; }
-        .grupo input[type="file"] { font-size: 11px; max-width: 130px; }
-        .sep { width: 1px; height: 55px; background: rgba(0,0,0,0.12); margin: 0 4px; }
-
-        /* ── ESCRITORIO ── */
-        .escritorio {
-            max-width: 900px;
-            margin: 0 auto 25px auto;
-        }
-        .escritorio-titulo {
-            font-size: 15px;
+        /* ── CARPETAS ── */
+        .seccion-titulo {
+            font-size: 13px;
             font-weight: bold;
             color: #8B4513;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 12px;
-            padding-left: 4px;
+            padding-left: 2px;
+            border-left: 3px solid #8B4513;
+            padding-left: 8px;
         }
-
-        /* ── CARPETAS ── */
         .carpetas-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto 25px auto;
+            gap: 16px;
+            margin-bottom: 30px;
         }
         .carpeta {
             display: flex;
@@ -103,25 +149,26 @@
             align-items: center;
             cursor: pointer;
             transition: transform 0.2s;
-            width: 110px;
+            width: 100px;
+            padding: 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.4);
         }
-        .carpeta:hover { transform: scale(1.08); }
-        .carpeta-icono {
-            font-size: 64px;
-            line-height: 1;
-            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.2));
+        .carpeta:hover {
+            transform: scale(1.06);
+            background: rgba(255,255,255,0.65);
         }
+        .carpeta-icono { font-size: 52px; line-height: 1; }
         .carpeta-nombre {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             color: #5a3010;
             text-align: center;
             margin-top: 6px;
-            word-break: break-word;
         }
         .carpeta-conteo {
             font-size: 11px;
-            color: #888;
+            color: #999;
             margin-top: 2px;
         }
 
@@ -130,7 +177,6 @@
             display: grid;
             gap: 14px;
             grid-template-columns: repeat(3, 1fr);
-            transition: all 0.3s;
         }
         .galeria.grande { grid-template-columns: repeat(2, 1fr); }
         .galeria.circulos img {
@@ -144,14 +190,14 @@
             height: 200px;
             object-fit: cover;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .galeria.grande img { height: 270px; border-radius: 14px; }
+        .galeria.grande img { height: 270px; }
         .galeria img:hover {
             transform: scale(1.04);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.28);
         }
 
         /* ── PAGINACIÓN ── */
@@ -159,9 +205,8 @@
             display: flex;
             justify-content: center;
             gap: 6px;
-            margin: 20px auto;
+            margin: 22px 0;
             flex-wrap: wrap;
-            max-width: 900px;
         }
         .paginacion button {
             padding: 7px 13px;
@@ -172,6 +217,7 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 13px;
+            transition: background 0.2s;
         }
         .paginacion button.activo { background: #8B4513; color: white; }
         .paginacion button:hover { background: #c8784a; color: white; }
@@ -195,7 +241,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.65);
             z-index: 8000;
             justify-content: center;
             align-items: center;
@@ -209,7 +255,7 @@
             width: 95%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
         }
         .modal-header {
             display: flex;
@@ -219,13 +265,12 @@
             border-bottom: 2px solid #f0e0d0;
             padding-bottom: 12px;
         }
-        .modal-header h2 { color: #8B4513; font-size: 22px; }
+        .modal-header h2 { color: #8B4513; font-size: 20px; }
         .modal-cerrar {
-            font-size: 28px;
+            font-size: 26px;
             cursor: pointer;
-            color: #aaa;
+            color: #bbb;
             font-weight: bold;
-            line-height: 1;
         }
         .modal-cerrar:hover { color: #333; }
         .galeria-modal {
@@ -240,7 +285,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: transform 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
         }
         .galeria-modal img:hover { transform: scale(1.04); }
 
@@ -259,7 +304,6 @@
             max-width: 92%;
             max-height: 92%;
             border-radius: 10px;
-            box-shadow: 0 0 40px rgba(255,255,255,0.15);
         }
         .lb-cerrar {
             position: absolute;
@@ -273,7 +317,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 46px;
+            font-size: 44px;
             color: white;
             cursor: pointer;
             background: rgba(0,0,0,0.35);
@@ -288,125 +332,157 @@
 </head>
 <body>
 
-<h1 id="titulo">📷 Mis Fotos Familiares</h1>
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar">
+    <div class="navbar-brand">📷 Mis Fotos Familiares</div>
+    <div class="navbar-menu">
 
-<!-- ══ PANEL ══ -->
-<div class="panel" id="panel">
-    <div class="seccion-panel">
-        <div class="grupo">
-            <label>Color título</label>
-            <input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()">
+        <!-- TÍTULO -->
+        <div class="dropdown">
+            <button class="navbar-btn">✏️ Título ▾</button>
+            <div class="dropdown-menu">
+                <div class="dropdown-item">
+                    <label>Color</label>
+                    <input type="color" id="colorTitulo" value="#8B4513" onchange="guardar('colorTitulo',this.value);cambiarColor()">
+                </div>
+                <div class="dropdown-item">
+                    <label>Tamaño</label>
+                    <input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="guardar('tamanoTitulo',this.value);cambiarTamano()">
+                </div>
+                <div class="dropdown-item">
+                    <label>Fuente</label>
+                    <select id="fuenteTitulo" onchange="guardar('fuenteTitulo',this.value);cambiarFuente()">
+                        <option value="Arial">Arial</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Pacifico">Pacifico</option>
+                        <option value="Dancing Script">Dancing Script</option>
+                        <option value="Playfair Display">Playfair Display</option>
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="Lobster">Lobster</option>
+                        <option value="Raleway">Raleway</option>
+                        <option value="Oswald">Oswald</option>
+                        <option value="Caveat">Caveat</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Impact">Impact</option>
+                    </select>
+                </div>
+                <div class="dropdown-item">
+                    <label>Diseño</label>
+                    <select id="disenoTitulo" onchange="guardar('disenoTitulo',this.value);cambiarDiseno()">
+                        <option value="normal">Normal</option>
+                        <option value="sombra">Con sombra</option>
+                        <option value="subrayado">Subrayado</option>
+                        <option value="mayusculas">MAYÚSCULAS</option>
+                        <option value="espaciado">Espaciado</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="grupo">
-            <label>Tamaño</label>
-            <input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="cambiarTamano()">
-        </div>
-        <div class="grupo">
-            <label>Fuente</label>
-            <select id="fuenteTitulo" onchange="cambiarFuente()">
-                <option value="Arial">Arial</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Pacifico">Pacifico</option>
-                <option value="Dancing Script">Dancing Script</option>
-                <option value="Playfair Display">Playfair Display</option>
-                <option value="Montserrat">Montserrat</option>
-                <option value="Lobster">Lobster</option>
-                <option value="Raleway">Raleway</option>
-                <option value="Oswald">Oswald</option>
-                <option value="Caveat">Caveat</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Impact">Impact</option>
-            </select>
-        </div>
-        <div class="grupo">
-            <label>Diseño</label>
-            <select id="disenoTitulo" onchange="cambiarDiseno()">
-                <option value="normal">Normal</option>
-                <option value="sombra">Con sombra</option>
-                <option value="subrayado">Subrayado</option>
-                <option value="mayusculas">MAYÚSCULAS</option>
-                <option value="espaciado">E S P A C I A D O</option>
-            </select>
-        </div>
-    </div>
-    <div class="sep"></div>
-    <div class="seccion-panel">
-        <div class="grupo">
-            <label>Forma</label>
-            <select id="formaFotos" onchange="cambiarForma()">
-                <option value="cuadricula">Cuadrícula</option>
-                <option value="circulos">Círculos</option>
-                <option value="grande">Cuadros grandes</option>
-            </select>
-        </div>
-        <div class="grupo">
-            <label>Fotos/página</label>
-            <select id="fotosPorPagina" onchange="cambiarFotosPorPagina()">
-                <option value="4">4</option>
-                <option value="6">6</option>
-                <option value="9" selected>9</option>
-                <option value="12">12</option>
-            </select>
-        </div>
-        <div class="grupo">
-            <label>Ordenar</label>
-            <select id="ordenFotos" onchange="ordenarFotos()">
-                <option value="original">Original</option>
-                <option value="az">A → Z</option>
-                <option value="za">Z → A</option>
-                <option value="nuevas">Más nuevas</option>
-                <option value="antiguas">Más antiguas</option>
-            </select>
-        </div>
-        <div class="grupo">
-            <label>Vista</label>
-            <select id="modoVista" onchange="cambiarModoVista()">
-                <option value="paginas">Páginas</option>
-                <option value="vermas">Ver más</option>
-            </select>
-        </div>
-    </div>
-    <div class="sep"></div>
-    <div class="seccion-panel">
-        <div class="grupo">
-            <label>Tipo fondo</label>
-            <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
-                <option value="degradado">Degradado</option>
-                <option value="solido">Sólido</option>
-                <option value="imagen">Mi imagen</option>
-            </select>
-        </div>
-        <div class="grupo" id="grupoDegradado">
-            <label>Color 1</label>
-            <input type="color" id="color1" value="#ffecd2" onchange="aplicarDegradado()">
-            <label>Color 2</label>
-            <input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()">
-        </div>
-        <div class="grupo" id="grupoSolido" style="display:none">
-            <label>Color fondo</label>
-            <input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()">
-        </div>
-        <div class="grupo" id="grupoImagen" style="display:none">
-            <label>Imagen fondo</label>
-            <input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()">
-        </div>
-        <div class="grupo">
-            <label>Color panel</label>
-            <input type="color" id="colorPanel" value="#ffffff" onchange="cambiarColorPanel()">
-        </div>
-        <div class="grupo">
-            <label>Opacidad panel</label>
-            <input type="range" id="opacidadPanel" min="10" max="100" value="55" oninput="cambiarColorPanel()">
-        </div>
-    </div>
-</div>
 
-<!-- ══ CARPETAS ══ -->
-<div class="carpetas-grid" id="carpetasGrid"></div>
+        <!-- FOTOS -->
+        <div class="dropdown">
+            <button class="navbar-btn">🖼️ Fotos ▾</button>
+            <div class="dropdown-menu">
+                <div class="dropdown-item">
+                    <label>Forma</label>
+                    <select id="formaFotos" onchange="guardar('formaFotos',this.value);cambiarForma()">
+                        <option value="cuadricula">Cuadrícula</option>
+                        <option value="circulos">Círculos</option>
+                        <option value="grande">Cuadros grandes</option>
+                    </select>
+                </div>
+                <div class="dropdown-item">
+                    <label>Por página</label>
+                    <select id="fotosPorPagina" onchange="guardar('fotosPorPagina',this.value);cambiarFotosPorPagina()">
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                        <option value="9" selected>9</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <div class="dropdown-item">
+                    <label>Ordenar</label>
+                    <select id="ordenFotos" onchange="ordenarFotos()">
+                        <option value="original">Original</option>
+                        <option value="az">A → Z</option>
+                        <option value="za">Z → A</option>
+                        <option value="nuevas">Más nuevas</option>
+                        <option value="antiguas">Más antiguas</option>
+                    </select>
+                </div>
+                <div class="dropdown-item">
+                    <label>Vista</label>
+                    <select id="modoVista" onchange="guardar('modoVista',this.value);cambiarModoVista()">
+                        <option value="paginas">Páginas</option>
+                        <option value="vermas">Ver más</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-<!-- ══ ESCRITORIO ══ -->
-<div class="escritorio">
-    <div class="escritorio-titulo">🖼️ Fotos en el escritorio</div>
+        <!-- FONDO -->
+        <div class="dropdown">
+            <button class="navbar-btn">🎨 Fondo ▾</button>
+            <div class="dropdown-menu">
+                <div class="dropdown-item">
+                    <label>Tipo</label>
+                    <select id="tipoFondo" onchange="guardar('tipoFondo',this.value);mostrarOpcionesFondo()">
+                        <option value="degradado">Degradado</option>
+                        <option value="solido">Sólido</option>
+                        <option value="imagen">Mi imagen</option>
+                    </select>
+                </div>
+                <div id="grupoDegradado">
+                    <div class="dropdown-item">
+                        <label>Color 1</label>
+                        <input type="color" id="color1" value="#ffecd2" onchange="guardar('color1',this.value);aplicarDegradado()">
+                    </div>
+                    <div class="dropdown-item">
+                        <label>Color 2</label>
+                        <input type="color" id="color2" value="#fcb69f" onchange="guardar('color2',this.value);aplicarDegradado()">
+                    </div>
+                </div>
+                <div id="grupoSolido" style="display:none">
+                    <div class="dropdown-item">
+                        <label>Color</label>
+                        <input type="color" id="colorSolido" value="#ffecd2" onchange="guardar('colorSolido',this.value);aplicarSolido()">
+                    </div>
+                </div>
+                <div id="grupoImagen" style="display:none">
+                    <div class="dropdown-item">
+                        <label>Imagen</label>
+                        <input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARPETAS -->
+        <div class="dropdown">
+            <button class="navbar-btn">📁 Carpetas ▾</button>
+            <div class="dropdown-menu">
+                <div class="dropdown-item">
+                    <label>Color carpetas</label>
+                    <input type="color" id="colorCarpetas" value="#ffffff" onchange="guardar('colorCarpetas',this.value);cambiarColorCarpetas()">
+                </div>
+                <div class="dropdown-item">
+                    <label>Opacidad</label>
+                    <input type="range" id="opacidadCarpetas" min="10" max="100" value="40" oninput="guardar('opacidadCarpetas',this.value);cambiarColorCarpetas()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<!-- ══ CONTENIDO ══ -->
+<div class="contenido">
+    <h1 id="titulo">📷 Mis Fotos Familiares</h1>
+
+    <div class="seccion-titulo">📁 Álbumes</div>
+    <div class="carpetas-grid" id="carpetasGrid"></div>
+
+    <div class="seccion-titulo">🖼️ Fotos en el escritorio</div>
     <div class="galeria cuadricula" id="galeria"></div>
     <div class="paginacion" id="paginacion"></div>
     <button class="btn-ver-mas" id="btnVerMas" onclick="verMas()">Ver más fotos ▼</button>
@@ -416,7 +492,7 @@
 <div class="modal" id="modal">
     <div class="modal-contenido">
         <div class="modal-header">
-            <h2 id="modalTitulo">📁 Carpeta</h2>
+            <h2 id="modalTitulo">📁 Álbum</h2>
             <span class="modal-cerrar" onclick="cerrarModal()">✕</span>
         </div>
         <div class="galeria-modal" id="galeriaModal"></div>
@@ -432,6 +508,15 @@
 </div>
 
 <script>
+// ══ GUARDAR/CARGAR CONFIGURACIÓN ══
+function guardar(clave, valor) {
+    localStorage.setItem('mfam_' + clave, valor);
+}
+function cargar(clave, defecto) {
+    return localStorage.getItem('mfam_' + clave) || defecto;
+}
+
+// ══ DATOS ══
 let datos = {};
 let fotosEscritorio = [];
 let fotosLightbox = [];
@@ -446,17 +531,78 @@ fetch('fotos.json')
     .then(data => {
         datos = data;
         fotosEscritorio = [...data.escritorio];
+        aplicarConfigGuardada();
         renderizarCarpetas();
         renderizar();
     });
 
-// ── CARPETAS ──
+// ══ APLICAR CONFIG GUARDADA ══
+function aplicarConfigGuardada() {
+    // Título
+    const color = cargar('colorTitulo', '#8B4513');
+    const tamano = cargar('tamanoTitulo', '36');
+    const fuente = cargar('fuenteTitulo', 'Arial');
+    const diseno = cargar('disenoTitulo', 'normal');
+    document.getElementById('colorTitulo').value = color;
+    document.getElementById('tamanoTitulo').value = tamano;
+    document.getElementById('fuenteTitulo').value = fuente;
+    document.getElementById('disenoTitulo').value = diseno;
+    const t = document.getElementById('titulo');
+    t.style.color = color;
+    t.style.fontSize = tamano + 'px';
+    t.style.fontFamily = fuente;
+    aplicarDisenoTitulo(diseno);
+
+    // Fotos
+    const forma = cargar('formaFotos', 'cuadricula');
+    const porPagina = cargar('fotosPorPagina', '9');
+    const vista = cargar('modoVista', 'paginas');
+    document.getElementById('formaFotos').value = forma;
+    document.getElementById('fotosPorPagina').value = porPagina;
+    document.getElementById('modoVista').value = vista;
+    document.getElementById('galeria').className = 'galeria ' + forma;
+    fotosPorPagina = parseInt(porPagina);
+    fotosVisibles = fotosPorPagina;
+    modoVista = vista;
+
+    // Fondo
+    const tipoFondo = cargar('tipoFondo', 'degradado');
+    document.getElementById('tipoFondo').value = tipoFondo;
+    mostrarOpcionesFondo();
+    if (tipoFondo === 'degradado') {
+        const c1 = cargar('color1', '#ffecd2');
+        const c2 = cargar('color2', '#fcb69f');
+        document.getElementById('color1').value = c1;
+        document.getElementById('color2').value = c2;
+        document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+    } else if (tipoFondo === 'solido') {
+        const cs = cargar('colorSolido', '#ffecd2');
+        document.getElementById('colorSolido').value = cs;
+        document.body.style.background = cs;
+    }
+
+    // Carpetas
+    const colorCarp = cargar('colorCarpetas', '#ffffff');
+    const opCarp = cargar('opacidadCarpetas', '40');
+    document.getElementById('colorCarpetas').value = colorCarp;
+    document.getElementById('opacidadCarpetas').value = opCarp;
+}
+
+// ══ CARPETAS ══
 function renderizarCarpetas() {
     const grid = document.getElementById("carpetasGrid");
     grid.innerHTML = "";
+    const colorCarp = cargar('colorCarpetas', '#ffffff');
+    const opCarp = parseInt(cargar('opacidadCarpetas', '40')) / 100;
+    const r = parseInt(colorCarp.slice(1,3),16);
+    const g = parseInt(colorCarp.slice(3,5),16);
+    const b = parseInt(colorCarp.slice(5,7),16);
+    const bg = `rgba(${r},${g},${b},${opCarp})`;
+
     Object.entries(datos.carpetas).forEach(([nombre, fotos]) => {
         const div = document.createElement("div");
         div.className = "carpeta";
+        div.style.background = bg;
         div.innerHTML = `
             <div class="carpeta-icono">📁</div>
             <div class="carpeta-nombre">${nombre}</div>
@@ -465,6 +611,10 @@ function renderizarCarpetas() {
         div.onclick = () => abrirCarpeta(nombre, fotos);
         grid.appendChild(div);
     });
+}
+
+function cambiarColorCarpetas() {
+    renderizarCarpetas();
 }
 
 function abrirCarpeta(nombre, fotos) {
@@ -486,7 +636,7 @@ function cerrarModal() {
     document.getElementById("modal").classList.remove("activo");
 }
 
-// ── GALERÍA ESCRITORIO ──
+// ══ GALERÍA ══
 function renderizar() {
     const galeria = document.getElementById("galeria");
     galeria.innerHTML = "";
@@ -498,8 +648,6 @@ function renderizar() {
     } else {
         fotosAMostrar = fotosEscritorio.slice(0, fotosVisibles);
     }
-
-    fotosLightbox = fotosEscritorio;
 
     fotosAMostrar.forEach((foto, i) => {
         const img = document.createElement("img");
@@ -548,7 +696,7 @@ function verMas() {
     renderizar();
 }
 
-// ── LIGHTBOX ──
+// ══ LIGHTBOX ══
 function abrirLightbox(index, lista) {
     fotoActual = index;
     fotosLightbox = lista;
@@ -565,7 +713,34 @@ function cambiarFoto(dir) {
     document.getElementById("lightboxImg").src = fotosLightbox[fotoActual];
 }
 
-// ── CONTROLES ──
+// ══ CONTROLES ══
+function cambiarColor() {
+    document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value;
+}
+function cambiarTamano() {
+    document.getElementById("titulo").style.fontSize = document.getElementById("tamanoTitulo").value + "px";
+}
+function cambiarFuente() {
+    document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value;
+}
+function cambiarDiseno() {
+    aplicarDisenoTitulo(document.getElementById("disenoTitulo").value);
+}
+function aplicarDisenoTitulo(d) {
+    const t = document.getElementById("titulo");
+    t.style.textShadow = "";
+    t.style.textDecoration = "";
+    t.style.textTransform = "";
+    t.style.letterSpacing = "";
+    if (d === "sombra") t.style.textShadow = "3px 3px 8px rgba(0,0,0,0.35)";
+    else if (d === "subrayado") t.style.textDecoration = "underline";
+    else if (d === "mayusculas") t.style.textTransform = "uppercase";
+    else if (d === "espaciado") t.style.letterSpacing = "10px";
+}
+function cambiarForma() {
+    const forma = document.getElementById("formaFotos").value;
+    document.getElementById("galeria").className = "galeria " + forma;
+}
 function cambiarFotosPorPagina() {
     fotosPorPagina = parseInt(document.getElementById("fotosPorPagina").value);
     fotosVisibles = fotosPorPagina;
@@ -588,35 +763,11 @@ function ordenarFotos() {
     paginaActual = 1;
     renderizar();
 }
-function cambiarForma() {
-    document.getElementById("galeria").className = "galeria " + document.getElementById("formaFotos").value;
-}
-function cambiarColor() {
-    document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value;
-}
-function cambiarTamano() {
-    document.getElementById("titulo").style.fontSize = document.getElementById("tamanoTitulo").value + "px";
-}
-function cambiarFuente() {
-    document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value;
-}
-function cambiarDiseno() {
-    const t = document.getElementById("titulo");
-    const d = document.getElementById("disenoTitulo").value;
-    t.style.textShadow = "";
-    t.style.textDecoration = "";
-    t.style.textTransform = "";
-    t.style.letterSpacing = "";
-    if (d === "sombra") t.style.textShadow = "3px 3px 8px rgba(0,0,0,0.35)";
-    else if (d === "subrayado") t.style.textDecoration = "underline";
-    else if (d === "mayusculas") t.style.textTransform = "uppercase";
-    else if (d === "espaciado") t.style.letterSpacing = "10px";
-}
 function mostrarOpcionesFondo() {
     const tipo = document.getElementById("tipoFondo").value;
-    document.getElementById("grupoDegradado").style.display = tipo === "degradado" ? "flex" : "none";
-    document.getElementById("grupoSolido").style.display = tipo === "solido" ? "flex" : "none";
-    document.getElementById("grupoImagen").style.display = tipo === "imagen" ? "flex" : "none";
+    document.getElementById("grupoDegradado").style.display = tipo === "degradado" ? "block" : "none";
+    document.getElementById("grupoSolido").style.display = tipo === "solido" ? "block" : "none";
+    document.getElementById("grupoImagen").style.display = tipo === "imagen" ? "block" : "none";
     if (tipo === "degradado") aplicarDegradado();
     if (tipo === "solido") aplicarSolido();
 }
@@ -632,14 +783,6 @@ function aplicarImagenFondo() {
     const f = document.getElementById("imagenFondo").files[0];
     if (!f) return;
     document.body.style.background = `url('${URL.createObjectURL(f)}') center/cover no-repeat fixed`;
-}
-function cambiarColorPanel() {
-    const hex = document.getElementById("colorPanel").value;
-    const op = document.getElementById("opacidadPanel").value / 100;
-    const r = parseInt(hex.slice(1,3),16);
-    const g = parseInt(hex.slice(3,5),16);
-    const b = parseInt(hex.slice(5,7),16);
-    document.getElementById("panel").style.background = `rgba(${r},${g},${b},${op})`;
 }
 
 document.addEventListener("keydown", e => {
