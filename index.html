@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Lobster&family=Raleway:wght@700&family=Oswald:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             font-family: Arial, sans-serif;
             min-height: 100vh;
@@ -15,10 +14,8 @@
             background: linear-gradient(135deg, #ffecd2, #fcb69f);
             transition: background 0.5s;
         }
-
-        /* ── NAVBAR ── */
         .navbar {
-            background: rgba(139, 69, 19, 0.92);
+            background: rgba(139,69,19,0.92);
             backdrop-filter: blur(8px);
             padding: 0 30px;
             display: flex;
@@ -30,16 +27,8 @@
             top: 0;
             z-index: 100;
         }
-        .navbar-brand {
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .navbar-menu {
-            display: flex;
-            gap: 4px;
-        }
+        .navbar-brand { color: white; font-size: 18px; font-weight: bold; letter-spacing: 1px; }
+        .navbar-menu { display: flex; gap: 4px; }
         .navbar-btn {
             background: none;
             border: none;
@@ -48,15 +37,10 @@
             padding: 8px 14px;
             border-radius: 6px;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
             font-weight: 500;
+            transition: background 0.2s;
         }
-        .navbar-btn:hover, .navbar-btn.activo {
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
-
-        /* ── DROPDOWN MENUS ── */
+        .navbar-btn:hover { background: rgba(255,255,255,0.2); color: white; }
         .dropdown { position: relative; }
         .dropdown-menu {
             display: none;
@@ -67,11 +51,10 @@
             border-radius: 10px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             padding: 10px;
-            min-width: 220px;
+            min-width: 230px;
             z-index: 200;
         }
-        .dropdown:hover .dropdown-menu,
-        .dropdown-menu:hover { display: block; }
+        .dropdown:hover .dropdown-menu { display: block; }
         .dropdown-item {
             display: flex;
             align-items: center;
@@ -83,11 +66,7 @@
             gap: 10px;
         }
         .dropdown-item:hover { background: #f5f0eb; }
-        .dropdown-item label {
-            font-size: 12px;
-            color: #666;
-            white-space: nowrap;
-        }
+        .dropdown-item label { font-size: 12px; color: #666; white-space: nowrap; }
         .dropdown-item select,
         .dropdown-item input[type="color"],
         .dropdown-item input[type="range"] {
@@ -98,34 +77,41 @@
             cursor: pointer;
             background: white;
         }
-        .dropdown-item input[type="color"] {
-            width: 40px; height: 28px; padding: 2px;
-        }
+        .dropdown-item input[type="color"] { width: 40px; height: 28px; padding: 2px; }
         .dropdown-item input[type="range"] { width: 100px; }
         .dropdown-item input[type="file"] { font-size: 11px; max-width: 140px; }
-        .dropdown-sep {
-            height: 1px;
-            background: #eee;
-            margin: 6px 0;
-        }
-
-        /* ── CONTENIDO ── */
-        .contenido {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 24px 20px;
-        }
-
-        /* ── TÍTULO ── */
-        h1 {
+        .btn-guardar-config {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
             text-align: center;
-            color: #8B4513;
-            font-size: 36px;
-            margin-bottom: 24px;
-            transition: all 0.3s;
         }
-
-        /* ── CARPETAS ── */
+        .btn-guardar-config:hover { background: #a0522d; }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d6a2d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .contenido { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+        h1 { text-align: center; color: #8B4513; font-size: 36px; margin-bottom: 24px; transition: all 0.3s; }
         .seccion-titulo {
             font-size: 13px;
             font-weight: bold;
@@ -133,16 +119,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 12px;
-            padding-left: 2px;
             border-left: 3px solid #8B4513;
             padding-left: 8px;
         }
-        .carpetas-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 30px;
-        }
+        .carpetas-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 30px; }
         .carpeta {
             display: flex;
             flex-direction: column;
@@ -154,177 +134,37 @@
             border-radius: 12px;
             background: rgba(255,255,255,0.4);
         }
-        .carpeta:hover {
-            transform: scale(1.06);
-            background: rgba(255,255,255,0.65);
-        }
+        .carpeta:hover { transform: scale(1.06); background: rgba(255,255,255,0.65); }
         .carpeta-icono { font-size: 52px; line-height: 1; }
-        .carpeta-nombre {
-            font-size: 12px;
-            font-weight: bold;
-            color: #5a3010;
-            text-align: center;
-            margin-top: 6px;
-        }
-        .carpeta-conteo {
-            font-size: 11px;
-            color: #999;
-            margin-top: 2px;
-        }
-
-        /* ── GALERÍA ── */
-        .galeria {
-            display: grid;
-            gap: 14px;
-            grid-template-columns: repeat(3, 1fr);
-        }
+        .carpeta-nombre { font-size: 12px; font-weight: bold; color: #5a3010; text-align: center; margin-top: 6px; }
+        .carpeta-conteo { font-size: 11px; color: #999; margin-top: 2px; }
+        .galeria { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
         .galeria.grande { grid-template-columns: repeat(2, 1fr); }
-        .galeria.circulos img {
-            border-radius: 50% !important;
-            height: 190px !important;
-            width: 190px !important;
-            justify-self: center;
-        }
-        .galeria img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+        .galeria.circulos img { border-radius: 50% !important; height: 190px !important; width: 190px !important; justify-self: center; }
+        .galeria img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.18); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
         .galeria.grande img { height: 270px; }
-        .galeria img:hover {
-            transform: scale(1.04);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.28);
-        }
-
-        /* ── PAGINACIÓN ── */
-        .paginacion {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin: 22px 0;
-            flex-wrap: wrap;
-        }
-        .paginacion button {
-            padding: 7px 13px;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.7);
-            color: #8B4513;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 13px;
-            transition: background 0.2s;
-        }
+        .galeria img:hover { transform: scale(1.04); box-shadow: 0 8px 22px rgba(0,0,0,0.28); }
+        .paginacion { display: flex; justify-content: center; gap: 6px; margin: 22px 0; flex-wrap: wrap; }
+        .paginacion button { padding: 7px 13px; border: none; border-radius: 8px; background: rgba(255,255,255,0.7); color: #8B4513; font-weight: bold; cursor: pointer; font-size: 13px; transition: background 0.2s; }
         .paginacion button.activo { background: #8B4513; color: white; }
         .paginacion button:hover { background: #c8784a; color: white; }
-
-        .btn-ver-mas {
-            display: none;
-            margin: 18px auto;
-            padding: 11px 28px;
-            border: none;
-            border-radius: 12px;
-            background: #8B4513;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        .btn-ver-mas { display: none; margin: 18px auto; padding: 11px 28px; border: none; border-radius: 12px; background: #8B4513; color: white; font-size: 15px; font-weight: bold; cursor: pointer; }
         .btn-ver-mas:hover { background: #a0522d; }
-
-        /* ── MODAL CARPETA ── */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.65);
-            z-index: 8000;
-            justify-content: center;
-            align-items: center;
-        }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 8000; justify-content: center; align-items: center; }
         .modal.activo { display: flex; }
-        .modal-contenido {
-            background: white;
-            border-radius: 18px;
-            padding: 24px;
-            max-width: 860px;
-            width: 95%;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-        }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            border-bottom: 2px solid #f0e0d0;
-            padding-bottom: 12px;
-        }
+        .modal-contenido { background: white; border-radius: 18px; padding: 24px; max-width: 860px; width: 95%; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.25); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid #f0e0d0; padding-bottom: 12px; }
         .modal-header h2 { color: #8B4513; font-size: 20px; }
-        .modal-cerrar {
-            font-size: 26px;
-            cursor: pointer;
-            color: #bbb;
-            font-weight: bold;
-        }
+        .modal-cerrar { font-size: 26px; cursor: pointer; color: #bbb; font-weight: bold; }
         .modal-cerrar:hover { color: #333; }
-        .galeria-modal {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-        .galeria-modal img {
-            width: 100%;
-            height: 170px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-        }
+        .galeria-modal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .galeria-modal img { width: 100%; height: 170px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform 0.2s; box-shadow: 0 3px 8px rgba(0,0,0,0.12); }
         .galeria-modal img:hover { transform: scale(1.04); }
-
-        /* ── LIGHTBOX ── */
-        .lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.92);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; z-index: 9999; }
         .lightbox.activo { display: flex; }
-        .lightbox img {
-            max-width: 92%;
-            max-height: 92%;
-            border-radius: 10px;
-        }
-        .lb-cerrar {
-            position: absolute;
-            top: 18px; right: 26px;
-            font-size: 38px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .lb-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 44px;
-            color: white;
-            cursor: pointer;
-            background: rgba(0,0,0,0.35);
-            padding: 10px 16px;
-            border-radius: 50%;
-            user-select: none;
-        }
+        .lightbox img { max-width: 92%; max-height: 92%; border-radius: 10px; }
+        .lb-cerrar { position: absolute; top: 18px; right: 26px; font-size: 38px; color: white; cursor: pointer; font-weight: bold; }
+        .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 44px; color: white; cursor: pointer; background: rgba(0,0,0,0.35); padding: 10px 16px; border-radius: 50%; user-select: none; }
         .lb-nav:hover { background: rgba(0,0,0,0.6); }
         .lb-nav.izq { left: 18px; }
         .lb-nav.der { right: 18px; }
@@ -332,26 +172,17 @@
 </head>
 <body>
 
-<!-- ══ NAVBAR ══ -->
 <nav class="navbar">
     <div class="navbar-brand">📷 Mis Fotos Familiares</div>
     <div class="navbar-menu">
 
-        <!-- TÍTULO -->
         <div class="dropdown">
             <button class="navbar-btn">✏️ Título ▾</button>
             <div class="dropdown-menu">
-                <div class="dropdown-item">
-                    <label>Color</label>
-                    <input type="color" id="colorTitulo" value="#8B4513" onchange="guardar('colorTitulo',this.value);cambiarColor()">
-                </div>
-                <div class="dropdown-item">
-                    <label>Tamaño</label>
-                    <input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="guardar('tamanoTitulo',this.value);cambiarTamano()">
-                </div>
-                <div class="dropdown-item">
-                    <label>Fuente</label>
-                    <select id="fuenteTitulo" onchange="guardar('fuenteTitulo',this.value);cambiarFuente()">
+                <div class="dropdown-item"><label>Color</label><input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()"></div>
+                <div class="dropdown-item"><label>Tamaño</label><input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="cambiarTamano()"></div>
+                <div class="dropdown-item"><label>Fuente</label>
+                    <select id="fuenteTitulo" onchange="cambiarFuente()">
                         <option value="Arial">Arial</option>
                         <option value="Georgia">Georgia</option>
                         <option value="Pacifico">Pacifico</option>
@@ -366,9 +197,8 @@
                         <option value="Impact">Impact</option>
                     </select>
                 </div>
-                <div class="dropdown-item">
-                    <label>Diseño</label>
-                    <select id="disenoTitulo" onchange="guardar('disenoTitulo',this.value);cambiarDiseno()">
+                <div class="dropdown-item"><label>Diseño</label>
+                    <select id="disenoTitulo" onchange="cambiarDiseno()">
                         <option value="normal">Normal</option>
                         <option value="sombra">Con sombra</option>
                         <option value="subrayado">Subrayado</option>
@@ -376,32 +206,29 @@
                         <option value="espaciado">Espaciado</option>
                     </select>
                 </div>
+                <button class="btn-guardar-config" onclick="guardarConfig('titulo')">💾 Guardar cambios de título</button>
             </div>
         </div>
 
-        <!-- FOTOS -->
         <div class="dropdown">
             <button class="navbar-btn">🖼️ Fotos ▾</button>
             <div class="dropdown-menu">
-                <div class="dropdown-item">
-                    <label>Forma</label>
-                    <select id="formaFotos" onchange="guardar('formaFotos',this.value);cambiarForma()">
+                <div class="dropdown-item"><label>Forma</label>
+                    <select id="formaFotos" onchange="cambiarForma()">
                         <option value="cuadricula">Cuadrícula</option>
                         <option value="circulos">Círculos</option>
                         <option value="grande">Cuadros grandes</option>
                     </select>
                 </div>
-                <div class="dropdown-item">
-                    <label>Por página</label>
-                    <select id="fotosPorPagina" onchange="guardar('fotosPorPagina',this.value);cambiarFotosPorPagina()">
+                <div class="dropdown-item"><label>Por página</label>
+                    <select id="fotosPorPagina" onchange="cambiarFotosPorPagina()">
                         <option value="4">4</option>
                         <option value="6">6</option>
                         <option value="9" selected>9</option>
                         <option value="12">12</option>
                     </select>
                 </div>
-                <div class="dropdown-item">
-                    <label>Ordenar</label>
+                <div class="dropdown-item"><label>Ordenar</label>
                     <select id="ordenFotos" onchange="ordenarFotos()">
                         <option value="original">Original</option>
                         <option value="az">A → Z</option>
@@ -410,85 +237,62 @@
                         <option value="antiguas">Más antiguas</option>
                     </select>
                 </div>
-                <div class="dropdown-item">
-                    <label>Vista</label>
-                    <select id="modoVista" onchange="guardar('modoVista',this.value);cambiarModoVista()">
+                <div class="dropdown-item"><label>Vista</label>
+                    <select id="modoVista" onchange="cambiarModoVista()">
                         <option value="paginas">Páginas</option>
                         <option value="vermas">Ver más</option>
                     </select>
                 </div>
+                <button class="btn-guardar-config" onclick="guardarConfig('fotos')">💾 Guardar cambios de fotos</button>
             </div>
         </div>
 
-        <!-- FONDO -->
         <div class="dropdown">
             <button class="navbar-btn">🎨 Fondo ▾</button>
             <div class="dropdown-menu">
-                <div class="dropdown-item">
-                    <label>Tipo</label>
-                    <select id="tipoFondo" onchange="guardar('tipoFondo',this.value);mostrarOpcionesFondo()">
+                <div class="dropdown-item"><label>Tipo</label>
+                    <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
                         <option value="degradado">Degradado</option>
                         <option value="solido">Sólido</option>
                         <option value="imagen">Mi imagen</option>
                     </select>
                 </div>
                 <div id="grupoDegradado">
-                    <div class="dropdown-item">
-                        <label>Color 1</label>
-                        <input type="color" id="color1" value="#ffecd2" onchange="guardar('color1',this.value);aplicarDegradado()">
-                    </div>
-                    <div class="dropdown-item">
-                        <label>Color 2</label>
-                        <input type="color" id="color2" value="#fcb69f" onchange="guardar('color2',this.value);aplicarDegradado()">
-                    </div>
+                    <div class="dropdown-item"><label>Color 1</label><input type="color" id="color1" value="#ffecd2" onchange="aplicarDegradado()"></div>
+                    <div class="dropdown-item"><label>Color 2</label><input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()"></div>
                 </div>
                 <div id="grupoSolido" style="display:none">
-                    <div class="dropdown-item">
-                        <label>Color</label>
-                        <input type="color" id="colorSolido" value="#ffecd2" onchange="guardar('colorSolido',this.value);aplicarSolido()">
-                    </div>
+                    <div class="dropdown-item"><label>Color</label><input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()"></div>
                 </div>
                 <div id="grupoImagen" style="display:none">
-                    <div class="dropdown-item">
-                        <label>Imagen</label>
-                        <input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()">
-                    </div>
+                    <div class="dropdown-item"><label>Imagen</label><input type="file" id="imagenFondo" accept="image/*" onchange="aplicarImagenFondo()"></div>
                 </div>
+                <button class="btn-guardar-config" onclick="guardarConfig('fondo')">💾 Guardar cambios de fondo</button>
             </div>
         </div>
 
-        <!-- CARPETAS -->
         <div class="dropdown">
             <button class="navbar-btn">📁 Carpetas ▾</button>
             <div class="dropdown-menu">
-                <div class="dropdown-item">
-                    <label>Color carpetas</label>
-                    <input type="color" id="colorCarpetas" value="#ffffff" onchange="guardar('colorCarpetas',this.value);cambiarColorCarpetas()">
-                </div>
-                <div class="dropdown-item">
-                    <label>Opacidad</label>
-                    <input type="range" id="opacidadCarpetas" min="10" max="100" value="40" oninput="guardar('opacidadCarpetas',this.value);cambiarColorCarpetas()">
-                </div>
+                <div class="dropdown-item"><label>Color</label><input type="color" id="colorCarpetas" value="#ffffff" onchange="cambiarColorCarpetas()"></div>
+                <div class="dropdown-item"><label>Opacidad</label><input type="range" id="opacidadCarpetas" min="10" max="100" value="40" oninput="cambiarColorCarpetas()"></div>
+                <button class="btn-guardar-config" onclick="guardarConfig('carpetas')">💾 Guardar cambios de carpetas</button>
             </div>
         </div>
 
     </div>
 </nav>
 
-<!-- ══ CONTENIDO ══ -->
 <div class="contenido">
     <h1 id="titulo">📷 Mis Fotos Familiares</h1>
-
     <div class="seccion-titulo">📁 Álbumes</div>
     <div class="carpetas-grid" id="carpetasGrid"></div>
-
     <div class="seccion-titulo">🖼️ Fotos en el escritorio</div>
     <div class="galeria cuadricula" id="galeria"></div>
     <div class="paginacion" id="paginacion"></div>
     <button class="btn-ver-mas" id="btnVerMas" onclick="verMas()">Ver más fotos ▼</button>
 </div>
 
-<!-- ══ MODAL CARPETA ══ -->
 <div class="modal" id="modal">
     <div class="modal-contenido">
         <div class="modal-header">
@@ -499,7 +303,6 @@
     </div>
 </div>
 
-<!-- ══ LIGHTBOX ══ -->
 <div class="lightbox" id="lightbox">
     <span class="lb-cerrar" onclick="cerrarLightbox()">✕</span>
     <span class="lb-nav izq" onclick="cambiarFoto(-1)">&#10094;</span>
@@ -507,17 +310,11 @@
     <span class="lb-nav der" onclick="cambiarFoto(1)">&#10095;</span>
 </div>
 
-<script>
-// ══ GUARDAR/CARGAR CONFIGURACIÓN ══
-function guardar(clave, valor) {
-    localStorage.setItem('mfam_' + clave, valor);
-}
-function cargar(clave, defecto) {
-    return localStorage.getItem('mfam_' + clave) || defecto;
-}
+<div class="toast" id="toast">✅ ¡Configuración guardada! Sube config.json a GitHub para que todos lo vean.</div>
 
-// ══ DATOS ══
+<script>
 let datos = {};
+let config = {};
 let fotosEscritorio = [];
 let fotosLightbox = [];
 let fotoActual = 0;
@@ -526,78 +323,102 @@ let fotosPorPagina = 9;
 let fotosVisibles = 9;
 let modoVista = "paginas";
 
-fetch('fotos.json')
-    .then(r => r.json())
-    .then(data => {
-        datos = data;
-        fotosEscritorio = [...data.escritorio];
-        aplicarConfigGuardada();
-        renderizarCarpetas();
-        renderizar();
-    });
+// Cargar config y fotos
+Promise.all([
+    fetch('config.json').then(r => r.json()),
+    fetch('fotos.json').then(r => r.json())
+]).then(([cfg, fts]) => {
+    config = cfg;
+    datos = fts;
+    fotosEscritorio = [...fts.escritorio];
+    aplicarConfig();
+    renderizarCarpetas();
+    renderizar();
+});
 
-// ══ APLICAR CONFIG GUARDADA ══
-function aplicarConfigGuardada() {
-    // Título
-    const color = cargar('colorTitulo', '#8B4513');
-    const tamano = cargar('tamanoTitulo', '36');
-    const fuente = cargar('fuenteTitulo', 'Arial');
-    const diseno = cargar('disenoTitulo', 'normal');
-    document.getElementById('colorTitulo').value = color;
-    document.getElementById('tamanoTitulo').value = tamano;
-    document.getElementById('fuenteTitulo').value = fuente;
-    document.getElementById('disenoTitulo').value = diseno;
+function aplicarConfig() {
     const t = document.getElementById('titulo');
-    t.style.color = color;
-    t.style.fontSize = tamano + 'px';
-    t.style.fontFamily = fuente;
-    aplicarDisenoTitulo(diseno);
+    const c = config.titulo;
+    t.textContent = c.texto;
+    t.style.color = c.color;
+    t.style.fontSize = c.tamano + 'px';
+    t.style.fontFamily = c.fuente;
+    aplicarDisenoTitulo(c.diseno);
+    document.getElementById('colorTitulo').value = c.color;
+    document.getElementById('tamanoTitulo').value = c.tamano;
+    document.getElementById('fuenteTitulo').value = c.fuente;
+    document.getElementById('disenoTitulo').value = c.diseno;
 
-    // Fotos
-    const forma = cargar('formaFotos', 'cuadricula');
-    const porPagina = cargar('fotosPorPagina', '9');
-    const vista = cargar('modoVista', 'paginas');
-    document.getElementById('formaFotos').value = forma;
-    document.getElementById('fotosPorPagina').value = porPagina;
-    document.getElementById('modoVista').value = vista;
-    document.getElementById('galeria').className = 'galeria ' + forma;
-    fotosPorPagina = parseInt(porPagina);
-    fotosVisibles = fotosPorPagina;
-    modoVista = vista;
-
-    // Fondo
-    const tipoFondo = cargar('tipoFondo', 'degradado');
-    document.getElementById('tipoFondo').value = tipoFondo;
+    const f = config.fondo;
+    document.getElementById('tipoFondo').value = f.tipo;
+    document.getElementById('color1').value = f.color1;
+    document.getElementById('color2').value = f.color2;
+    document.getElementById('colorSolido').value = f.colorSolido;
     mostrarOpcionesFondo();
-    if (tipoFondo === 'degradado') {
-        const c1 = cargar('color1', '#ffecd2');
-        const c2 = cargar('color2', '#fcb69f');
-        document.getElementById('color1').value = c1;
-        document.getElementById('color2').value = c2;
-        document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-    } else if (tipoFondo === 'solido') {
-        const cs = cargar('colorSolido', '#ffecd2');
-        document.getElementById('colorSolido').value = cs;
-        document.body.style.background = cs;
+    if (f.tipo === 'degradado') document.body.style.background = `linear-gradient(135deg, ${f.color1}, ${f.color2})`;
+    else if (f.tipo === 'solido') document.body.style.background = f.colorSolido;
+
+    const fo = config.fotos;
+    document.getElementById('formaFotos').value = fo.forma;
+    document.getElementById('fotosPorPagina').value = fo.porPagina;
+    document.getElementById('modoVista').value = fo.vista;
+    document.getElementById('galeria').className = 'galeria ' + fo.forma;
+    fotosPorPagina = parseInt(fo.porPagina);
+    fotosVisibles = fotosPorPagina;
+    modoVista = fo.vista;
+
+    const ca = config.carpetas;
+    document.getElementById('colorCarpetas').value = ca.color;
+    document.getElementById('opacidadCarpetas').value = ca.opacidad;
+}
+
+// ══ GUARDAR CONFIG ══
+function guardarConfig(seccion) {
+    if (seccion === 'titulo') {
+        config.titulo.color = document.getElementById('colorTitulo').value;
+        config.titulo.tamano = document.getElementById('tamanoTitulo').value;
+        config.titulo.fuente = document.getElementById('fuenteTitulo').value;
+        config.titulo.diseno = document.getElementById('disenoTitulo').value;
+    } else if (seccion === 'fondo') {
+        config.fondo.tipo = document.getElementById('tipoFondo').value;
+        config.fondo.color1 = document.getElementById('color1').value;
+        config.fondo.color2 = document.getElementById('color2').value;
+        config.fondo.colorSolido = document.getElementById('colorSolido').value;
+    } else if (seccion === 'fotos') {
+        config.fotos.forma = document.getElementById('formaFotos').value;
+        config.fotos.porPagina = document.getElementById('fotosPorPagina').value;
+        config.fotos.vista = document.getElementById('modoVista').value;
+    } else if (seccion === 'carpetas') {
+        config.carpetas.color = document.getElementById('colorCarpetas').value;
+        config.carpetas.opacidad = document.getElementById('opacidadCarpetas').value;
     }
 
-    // Carpetas
-    const colorCarp = cargar('colorCarpetas', '#ffffff');
-    const opCarp = cargar('opacidadCarpetas', '40');
-    document.getElementById('colorCarpetas').value = colorCarp;
-    document.getElementById('opacidadCarpetas').value = opCarp;
+    // Descargar config.json actualizado
+    const blob = new Blob([JSON.stringify(config, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'config.json';
+    a.click();
+
+    mostrarToast();
+}
+
+function mostrarToast() {
+    const t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 5000);
 }
 
 // ══ CARPETAS ══
 function renderizarCarpetas() {
     const grid = document.getElementById("carpetasGrid");
     grid.innerHTML = "";
-    const colorCarp = cargar('colorCarpetas', '#ffffff');
-    const opCarp = parseInt(cargar('opacidadCarpetas', '40')) / 100;
+    const colorCarp = config.carpetas.color;
+    const op = parseInt(config.carpetas.opacidad) / 100;
     const r = parseInt(colorCarp.slice(1,3),16);
     const g = parseInt(colorCarp.slice(3,5),16);
     const b = parseInt(colorCarp.slice(5,7),16);
-    const bg = `rgba(${r},${g},${b},${opCarp})`;
+    const bg = `rgba(${r},${g},${b},${op})`;
 
     Object.entries(datos.carpetas).forEach(([nombre, fotos]) => {
         const div = document.createElement("div");
@@ -614,6 +435,8 @@ function renderizarCarpetas() {
 }
 
 function cambiarColorCarpetas() {
+    config.carpetas.color = document.getElementById('colorCarpetas').value;
+    config.carpetas.opacidad = document.getElementById('opacidadCarpetas').value;
     renderizarCarpetas();
 }
 
@@ -641,24 +464,20 @@ function renderizar() {
     const galeria = document.getElementById("galeria");
     galeria.innerHTML = "";
     let fotosAMostrar = [];
-
     if (modoVista === "paginas") {
         const inicio = (paginaActual - 1) * fotosPorPagina;
         fotosAMostrar = fotosEscritorio.slice(inicio, inicio + fotosPorPagina);
     } else {
         fotosAMostrar = fotosEscritorio.slice(0, fotosVisibles);
     }
-
     fotosAMostrar.forEach((foto, i) => {
         const img = document.createElement("img");
         img.src = foto;
         img.alt = "Foto " + (i + 1);
-        const indexReal = modoVista === "paginas"
-            ? (paginaActual - 1) * fotosPorPagina + i : i;
+        const indexReal = modoVista === "paginas" ? (paginaActual - 1) * fotosPorPagina + i : i;
         img.onclick = () => abrirLightbox(indexReal, fotosEscritorio);
         galeria.appendChild(img);
     });
-
     if (modoVista === "paginas") {
         renderizarPaginacion();
         document.getElementById("btnVerMas").style.display = "none";
@@ -691,10 +510,7 @@ function renderizarPaginacion() {
     pag.appendChild(next);
 }
 
-function verMas() {
-    fotosVisibles += fotosPorPagina;
-    renderizar();
-}
+function verMas() { fotosVisibles += fotosPorPagina; renderizar(); }
 
 // ══ LIGHTBOX ══
 function abrirLightbox(index, lista) {
@@ -703,9 +519,7 @@ function abrirLightbox(index, lista) {
     document.getElementById("lightboxImg").src = fotosLightbox[fotoActual];
     document.getElementById("lightbox").classList.add("activo");
 }
-function cerrarLightbox() {
-    document.getElementById("lightbox").classList.remove("activo");
-}
+function cerrarLightbox() { document.getElementById("lightbox").classList.remove("activo"); }
 function cambiarFoto(dir) {
     fotoActual += dir;
     if (fotoActual < 0) fotoActual = fotosLightbox.length - 1;
@@ -714,45 +528,21 @@ function cambiarFoto(dir) {
 }
 
 // ══ CONTROLES ══
-function cambiarColor() {
-    document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value;
-}
-function cambiarTamano() {
-    document.getElementById("titulo").style.fontSize = document.getElementById("tamanoTitulo").value + "px";
-}
-function cambiarFuente() {
-    document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value;
-}
-function cambiarDiseno() {
-    aplicarDisenoTitulo(document.getElementById("disenoTitulo").value);
-}
+function cambiarColor() { document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value; }
+function cambiarTamano() { document.getElementById("titulo").style.fontSize = document.getElementById("tamanoTitulo").value + "px"; }
+function cambiarFuente() { document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value; }
+function cambiarDiseno() { aplicarDisenoTitulo(document.getElementById("disenoTitulo").value); }
 function aplicarDisenoTitulo(d) {
     const t = document.getElementById("titulo");
-    t.style.textShadow = "";
-    t.style.textDecoration = "";
-    t.style.textTransform = "";
-    t.style.letterSpacing = "";
+    t.style.textShadow = ""; t.style.textDecoration = ""; t.style.textTransform = ""; t.style.letterSpacing = "";
     if (d === "sombra") t.style.textShadow = "3px 3px 8px rgba(0,0,0,0.35)";
     else if (d === "subrayado") t.style.textDecoration = "underline";
     else if (d === "mayusculas") t.style.textTransform = "uppercase";
     else if (d === "espaciado") t.style.letterSpacing = "10px";
 }
-function cambiarForma() {
-    const forma = document.getElementById("formaFotos").value;
-    document.getElementById("galeria").className = "galeria " + forma;
-}
-function cambiarFotosPorPagina() {
-    fotosPorPagina = parseInt(document.getElementById("fotosPorPagina").value);
-    fotosVisibles = fotosPorPagina;
-    paginaActual = 1;
-    renderizar();
-}
-function cambiarModoVista() {
-    modoVista = document.getElementById("modoVista").value;
-    paginaActual = 1;
-    fotosVisibles = fotosPorPagina;
-    renderizar();
-}
+function cambiarForma() { document.getElementById("galeria").className = "galeria " + document.getElementById("formaFotos").value; }
+function cambiarFotosPorPagina() { fotosPorPagina = parseInt(document.getElementById("fotosPorPagina").value); fotosVisibles = fotosPorPagina; paginaActual = 1; renderizar(); }
+function cambiarModoVista() { modoVista = document.getElementById("modoVista").value; paginaActual = 1; fotosVisibles = fotosPorPagina; renderizar(); }
 function ordenarFotos() {
     const orden = document.getElementById("ordenFotos").value;
     if (orden === "original") fotosEscritorio = [...datos.escritorio];
@@ -760,8 +550,7 @@ function ordenarFotos() {
     else if (orden === "za") fotosEscritorio = [...datos.escritorio].sort().reverse();
     else if (orden === "nuevas") fotosEscritorio = [...datos.escritorio].reverse();
     else if (orden === "antiguas") fotosEscritorio = [...datos.escritorio];
-    paginaActual = 1;
-    renderizar();
+    paginaActual = 1; renderizar();
 }
 function mostrarOpcionesFondo() {
     const tipo = document.getElementById("tipoFondo").value;
@@ -772,13 +561,9 @@ function mostrarOpcionesFondo() {
     if (tipo === "solido") aplicarSolido();
 }
 function aplicarDegradado() {
-    const c1 = document.getElementById("color1").value;
-    const c2 = document.getElementById("color2").value;
-    document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+    document.body.style.background = `linear-gradient(135deg, ${document.getElementById("color1").value}, ${document.getElementById("color2").value})`;
 }
-function aplicarSolido() {
-    document.body.style.background = document.getElementById("colorSolido").value;
-}
+function aplicarSolido() { document.body.style.background = document.getElementById("colorSolido").value; }
 function aplicarImagenFondo() {
     const f = document.getElementById("imagenFondo").files[0];
     if (!f) return;
