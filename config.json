@@ -2,14 +2,14 @@
   "titulo": {
     "texto": "📷 Mis Fotos Familiares",
     "color": "#8b4513",
-    "tamano": "58",
+    "tamano": "36",
     "fuente": "Lobster",
     "diseno": "normal"
   },
   "fondo": {
     "tipo": "degradado",
-    "color1": "#ddab64",
-    "color2": "#a48479",
+    "color1": "#ffecd2",
+    "color2": "#e17956",
     "colorSolido": "#ffecd2"
   },
   "fotos": {
