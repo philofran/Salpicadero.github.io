@@ -9,12 +9,24 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial, sans-serif; min-height: 100vh; padding: 0; background: linear-gradient(135deg, #ffecd2, #fcb69f); transition: background 0.5s; }
 
-        /* ── NAVBAR ── */
+        .login-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99999; justify-content: center; align-items: center; }
+        .login-overlay.activo { display: flex; }
+        .login-box { background: white; border-radius: 18px; padding: 32px; max-width: 360px; width: 95%; box-shadow: 0 10px 40px rgba(0,0,0,0.25); text-align: center; }
+        .login-box h2 { color: #8B4513; margin-bottom: 8px; font-size: 22px; }
+        .login-box p { color: #888; font-size: 13px; margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; margin-bottom: 12px; }
+        .login-box button { width: 100%; padding: 11px; background: #8B4513; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; }
+        .login-box button:hover { background: #a0522d; }
+        .login-error { color: red; font-size: 12px; margin-top: 8px; display: none; }
+        .login-cerrar { float: right; font-size: 22px; cursor: pointer; color: #aaa; line-height: 1; margin-bottom: 10px; }
+
         .navbar { background: rgba(139,69,19,0.92); backdrop-filter: blur(8px); padding: 0 30px; display: flex; align-items: center; justify-content: space-between; height: 56px; box-shadow: 0 2px 12px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; }
         .navbar-brand { color: white; font-size: 18px; font-weight: bold; letter-spacing: 1px; }
-        .navbar-menu { display: flex; gap: 4px; }
+        .navbar-menu { display: flex; gap: 4px; align-items: center; }
         .navbar-btn { background: none; border: none; color: rgba(255,255,255,0.85); font-size: 13px; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: background 0.2s; }
         .navbar-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+        .btn-login-nav { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 12px; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+        .btn-login-nav:hover { background: rgba(255,255,255,0.25); }
         .dropdown { position: relative; }
         .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; background: white; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); padding: 10px; min-width: 230px; z-index: 200; }
         .dropdown:hover .dropdown-menu { display: block; }
@@ -27,16 +39,13 @@
         .btn-guardar-config { display: block; width: 100%; margin-top: 8px; padding: 8px; background: #8B4513; color: white; border: none; border-radius: 7px; cursor: pointer; font-size: 12px; font-weight: bold; }
         .btn-guardar-config:hover { background: #a0522d; }
 
-        /* ── CONTENIDO ── */
         .contenido { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
         h1 { text-align: center; color: #8B4513; font-size: 36px; margin-bottom: 24px; transition: all 0.3s; }
         .seccion-titulo { font-size: 13px; font-weight: bold; color: #8B4513; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; border-left: 3px solid #8B4513; padding-left: 8px; }
 
-        /* ── BOTÓN SUBIR ── */
         .btn-subir { display: flex; align-items: center; gap: 8px; background: #8B4513; color: white; border: none; border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; margin-bottom: 20px; transition: background 0.2s; }
         .btn-subir:hover { background: #a0522d; }
 
-        /* ── MODAL SUBIR ── */
         .modal-subir { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9000; justify-content: center; align-items: center; }
         .modal-subir.activo { display: flex; }
         .modal-subir-contenido { background: white; border-radius: 18px; padding: 28px; max-width: 480px; width: 95%; box-shadow: 0 10px 40px rgba(0,0,0,0.25); }
@@ -44,17 +53,13 @@
         .form-grupo { margin-bottom: 16px; }
         .form-grupo label { display: block; font-size: 13px; font-weight: bold; color: #555; margin-bottom: 6px; }
         .form-grupo select, .form-grupo input[type="file"] { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
-        .form-grupo input[type="text"] { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
         .btn-upload-confirm { width: 100%; padding: 12px; background: #8B4513; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .btn-upload-confirm:hover { background: #a0522d; }
         .btn-upload-confirm:disabled { background: #ccc; cursor: not-allowed; }
         .progress-bar { width: 100%; height: 8px; background: #eee; border-radius: 4px; margin-top: 12px; display: none; }
         .progress-fill { height: 100%; background: #8B4513; border-radius: 4px; transition: width 0.3s; width: 0%; }
         .upload-status { font-size: 13px; color: #666; margin-top: 8px; text-align: center; }
         .modal-subir-cerrar { float: right; font-size: 24px; cursor: pointer; color: #aaa; font-weight: bold; line-height: 1; }
-        .modal-subir-cerrar:hover { color: #333; }
 
-        /* ── CARPETAS ── */
         .carpetas-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 30px; }
         .carpeta { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.2s; width: 100px; padding: 10px; border-radius: 12px; background: rgba(255,255,255,0.4); }
         .carpeta:hover { transform: scale(1.06); background: rgba(255,255,255,0.65); }
@@ -62,7 +67,6 @@
         .carpeta-nombre { font-size: 12px; font-weight: bold; color: #5a3010; text-align: center; margin-top: 6px; }
         .carpeta-conteo { font-size: 11px; color: #999; margin-top: 2px; }
 
-        /* ── GALERÍA ── */
         .galeria { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
         .galeria.grande { grid-template-columns: repeat(2, 1fr); }
         .galeria.circulos img { border-radius: 50% !important; height: 190px !important; width: 190px !important; justify-self: center; }
@@ -70,20 +74,20 @@
         .galeria-item:hover .item-acciones { opacity: 1; }
         .item-acciones { position: absolute; top: 8px; right: 8px; display: flex; gap: 4px; opacity: 0; transition: opacity 0.2s; }
         .item-btn { background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 6px; padding: 4px 8px; font-size: 11px; cursor: pointer; }
+        .item-btn.rojo { background: rgba(180,0,0,0.7); }
         .item-btn:hover { background: rgba(0,0,0,0.85); }
+        .item-btn.rojo:hover { background: rgba(180,0,0,0.95); }
         .galeria img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.18); cursor: pointer; transition: transform 0.2s; display: block; }
         .galeria.grande img { height: 270px; }
         .galeria img:hover { transform: scale(1.04); }
-        .video-thumb { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.18); cursor: pointer; background: #222; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .video-thumb { width: 100%; height: 200px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.18); cursor: pointer; background: #222; display: flex; align-items: center; justify-content: center; font-size: 48px; }
 
-        /* ── PAGINACIÓN ── */
         .paginacion { display: flex; justify-content: center; gap: 6px; margin: 22px 0; flex-wrap: wrap; }
         .paginacion button { padding: 7px 13px; border: none; border-radius: 8px; background: rgba(255,255,255,0.7); color: #8B4513; font-weight: bold; cursor: pointer; font-size: 13px; transition: background 0.2s; }
         .paginacion button.activo { background: #8B4513; color: white; }
         .paginacion button:hover { background: #c8784a; color: white; }
         .btn-ver-mas { display: none; margin: 18px auto; padding: 11px 28px; border: none; border-radius: 12px; background: #8B4513; color: white; font-size: 15px; font-weight: bold; cursor: pointer; }
 
-        /* ── MODAL CARPETA ── */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 8000; justify-content: center; align-items: center; }
         .modal.activo { display: flex; }
         .modal-contenido { background: white; border-radius: 18px; padding: 24px; max-width: 860px; width: 95%; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.25); }
@@ -97,21 +101,17 @@
         .galeria-modal img { width: 100%; height: 170px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform 0.2s; box-shadow: 0 3px 8px rgba(0,0,0,0.12); display: block; }
         .galeria-modal img:hover { transform: scale(1.04); }
 
-        /* ── LIGHTBOX ── */
         .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); justify-content: center; align-items: center; z-index: 9999; }
         .lightbox.activo { display: flex; }
         .lightbox img { max-width: 92%; max-height: 92%; border-radius: 10px; }
-        .lightbox video { max-width: 92%; max-height: 92%; border-radius: 10px; }
         .lb-cerrar { position: absolute; top: 18px; right: 26px; font-size: 38px; color: white; cursor: pointer; font-weight: bold; }
         .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 44px; color: white; cursor: pointer; background: rgba(0,0,0,0.35); padding: 10px 16px; border-radius: 50%; user-select: none; }
         .lb-nav:hover { background: rgba(0,0,0,0.6); }
         .lb-nav.izq { left: 18px; }
         .lb-nav.der { right: 18px; }
 
-        /* ── TOAST ── */
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2d6a2d; color: white; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: bold; z-index: 99999; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
-        /* ── MODAL MOVER ── */
         .modal-mover { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9500; justify-content: center; align-items: center; }
         .modal-mover.activo { display: flex; }
         .modal-mover-contenido { background: white; border-radius: 14px; padding: 24px; max-width: 360px; width: 95%; }
@@ -121,123 +121,145 @@
         .modal-mover-btns button { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
         .btn-confirmar-mover { background: #8B4513; color: white; }
         .btn-cancelar-mover { background: #eee; color: #333; }
+
+        .modal-confirmar { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9800; justify-content: center; align-items: center; }
+        .modal-confirmar.activo { display: flex; }
+        .modal-confirmar-contenido { background: white; border-radius: 14px; padding: 28px; max-width: 340px; width: 95%; text-align: center; }
+        .modal-confirmar h3 { color: #cc0000; margin-bottom: 12px; }
+        .modal-confirmar p { color: #555; font-size: 14px; margin-bottom: 20px; }
+        .modal-confirmar-btns { display: flex; gap: 10px; }
+        .modal-confirmar-btns button { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .btn-confirmar-eliminar { background: #cc0000; color: white; }
+        .btn-cancelar-eliminar { background: #eee; color: #333; }
+
+        .oculto { display: none !important; }
+        .spinner { display: inline-block; width: 40px; height: 40px; border: 4px solid rgba(139,69,19,0.2); border-top-color: #8B4513; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 20px auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .cargando { text-align: center; padding: 30px; color: #8B4513; }
     </style>
 </head>
 <body>
 
-<!-- ══ NAVBAR ══ -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+        <span class="login-cerrar" onclick="cerrarLogin()">✕</span>
+        <h2>🔐 Iniciar sesión</h2>
+        <p>Ingresa tu contraseña</p>
+        <input type="password" id="loginInput" placeholder="Contraseña" onkeydown="if(event.key==='Enter')verificarLogin()">
+        <button onclick="verificarLogin()">Entrar</button>
+        <div class="login-error" id="loginError">❌ Contraseña incorrecta</div>
+    </div>
+</div>
+
 <nav class="navbar">
     <div class="navbar-brand">📷 Mis Fotos Familiares</div>
     <div class="navbar-menu">
-        <div class="dropdown">
-            <button class="navbar-btn">✏️ Título ▾</button>
-            <div class="dropdown-menu">
-                <div class="dropdown-item"><label>Color</label><input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()"></div>
-                <div class="dropdown-item"><label>Tamaño</label><input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="cambiarTamano()"></div>
-                <div class="dropdown-item"><label>Fuente</label>
-                    <select id="fuenteTitulo" onchange="cambiarFuente()">
-                        <option value="Arial">Arial</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Pacifico">Pacifico</option>
-                        <option value="Dancing Script">Dancing Script</option>
-                        <option value="Playfair Display">Playfair Display</option>
-                        <option value="Montserrat">Montserrat</option>
-                        <option value="Lobster">Lobster</option>
-                        <option value="Raleway">Raleway</option>
-                        <option value="Oswald">Oswald</option>
-                        <option value="Caveat">Caveat</option>
-                        <option value="Courier New">Courier New</option>
-                        <option value="Impact">Impact</option>
-                    </select>
+        <div id="menuAdmin" class="oculto" style="display:flex; gap:4px;">
+            <div class="dropdown">
+                <button class="navbar-btn">✏️ Título ▾</button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item"><label>Color</label><input type="color" id="colorTitulo" value="#8B4513" onchange="cambiarColor()"></div>
+                    <div class="dropdown-item"><label>Tamaño</label><input type="range" id="tamanoTitulo" min="20" max="72" value="36" oninput="cambiarTamano()"></div>
+                    <div class="dropdown-item"><label>Fuente</label>
+                        <select id="fuenteTitulo" onchange="cambiarFuente()">
+                            <option value="Arial">Arial</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Pacifico">Pacifico</option>
+                            <option value="Dancing Script">Dancing Script</option>
+                            <option value="Playfair Display">Playfair Display</option>
+                            <option value="Montserrat">Montserrat</option>
+                            <option value="Lobster">Lobster</option>
+                            <option value="Raleway">Raleway</option>
+                            <option value="Oswald">Oswald</option>
+                            <option value="Caveat">Caveat</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Impact">Impact</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-item"><label>Diseño</label>
+                        <select id="disenoTitulo" onchange="cambiarDiseno()">
+                            <option value="normal">Normal</option>
+                            <option value="sombra">Con sombra</option>
+                            <option value="subrayado">Subrayado</option>
+                            <option value="mayusculas">MAYÚSCULAS</option>
+                            <option value="espaciado">Espaciado</option>
+                        </select>
+                    </div>
+                    <button class="btn-guardar-config" onclick="guardarConfig('titulo')">💾 Guardar título</button>
                 </div>
-                <div class="dropdown-item"><label>Diseño</label>
-                    <select id="disenoTitulo" onchange="cambiarDiseno()">
-                        <option value="normal">Normal</option>
-                        <option value="sombra">Con sombra</option>
-                        <option value="subrayado">Subrayado</option>
-                        <option value="mayusculas">MAYÚSCULAS</option>
-                        <option value="espaciado">Espaciado</option>
-                    </select>
+            </div>
+            <div class="dropdown">
+                <button class="navbar-btn">🖼️ Fotos ▾</button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item"><label>Forma</label>
+                        <select id="formaFotos" onchange="cambiarForma()">
+                            <option value="cuadricula">Cuadrícula</option>
+                            <option value="circulos">Círculos</option>
+                            <option value="grande">Cuadros grandes</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-item"><label>Por página</label>
+                        <select id="fotosPorPagina" onchange="cambiarFotosPorPagina()">
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="9" selected>9</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-item"><label>Vista</label>
+                        <select id="modoVista" onchange="cambiarModoVista()">
+                            <option value="paginas">Páginas</option>
+                            <option value="vermas">Ver más</option>
+                        </select>
+                    </div>
+                    <button class="btn-guardar-config" onclick="guardarConfig('fotos')">💾 Guardar fotos</button>
                 </div>
-                <button class="btn-guardar-config" onclick="guardarConfig('titulo')">💾 Guardar título</button>
+            </div>
+            <div class="dropdown">
+                <button class="navbar-btn">🎨 Fondo ▾</button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item"><label>Tipo</label>
+                        <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
+                            <option value="degradado">Degradado</option>
+                            <option value="solido">Sólido</option>
+                        </select>
+                    </div>
+                    <div id="grupoDegradado">
+                        <div class="dropdown-item"><label>Color 1</label><input type="color" id="color1" value="#ffecd2" onchange="aplicarDegradado()"></div>
+                        <div class="dropdown-item"><label>Color 2</label><input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()"></div>
+                    </div>
+                    <div id="grupoSolido" style="display:none">
+                        <div class="dropdown-item"><label>Color</label><input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()"></div>
+                    </div>
+                    <button class="btn-guardar-config" onclick="guardarConfig('fondo')">💾 Guardar fondo</button>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="navbar-btn">📁 Carpetas ▾</button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item"><label>Color</label><input type="color" id="colorCarpetas" value="#ffffff" onchange="cambiarColorCarpetas()"></div>
+                    <div class="dropdown-item"><label>Opacidad</label><input type="range" id="opacidadCarpetas" min="10" max="100" value="40" oninput="cambiarColorCarpetas()"></div>
+                    <button class="btn-guardar-config" onclick="guardarConfig('carpetas')">💾 Guardar carpetas</button>
+                </div>
             </div>
         </div>
-        <div class="dropdown">
-            <button class="navbar-btn">🖼️ Fotos ▾</button>
-            <div class="dropdown-menu">
-                <div class="dropdown-item"><label>Forma</label>
-                    <select id="formaFotos" onchange="cambiarForma()">
-                        <option value="cuadricula">Cuadrícula</option>
-                        <option value="circulos">Círculos</option>
-                        <option value="grande">Cuadros grandes</option>
-                    </select>
-                </div>
-                <div class="dropdown-item"><label>Por página</label>
-                    <select id="fotosPorPagina" onchange="cambiarFotosPorPagina()">
-                        <option value="4">4</option>
-                        <option value="6">6</option>
-                        <option value="9" selected>9</option>
-                        <option value="12">12</option>
-                    </select>
-                </div>
-                <div class="dropdown-item"><label>Vista</label>
-                    <select id="modoVista" onchange="cambiarModoVista()">
-                        <option value="paginas">Páginas</option>
-                        <option value="vermas">Ver más</option>
-                    </select>
-                </div>
-                <button class="btn-guardar-config" onclick="guardarConfig('fotos')">💾 Guardar fotos</button>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="navbar-btn">🎨 Fondo ▾</button>
-            <div class="dropdown-menu">
-                <div class="dropdown-item"><label>Tipo</label>
-                    <select id="tipoFondo" onchange="mostrarOpcionesFondo()">
-                        <option value="degradado">Degradado</option>
-                        <option value="solido">Sólido</option>
-                    </select>
-                </div>
-                <div id="grupoDegradado">
-                    <div class="dropdown-item"><label>Color 1</label><input type="color" id="color1" value="#ffecd2" onchange="aplicarDegradado()"></div>
-                    <div class="dropdown-item"><label>Color 2</label><input type="color" id="color2" value="#fcb69f" onchange="aplicarDegradado()"></div>
-                </div>
-                <div id="grupoSolido" style="display:none">
-                    <div class="dropdown-item"><label>Color</label><input type="color" id="colorSolido" value="#ffecd2" onchange="aplicarSolido()"></div>
-                </div>
-                <button class="btn-guardar-config" onclick="guardarConfig('fondo')">💾 Guardar fondo</button>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="navbar-btn">📁 Carpetas ▾</button>
-            <div class="dropdown-menu">
-                <div class="dropdown-item"><label>Color</label><input type="color" id="colorCarpetas" value="#ffffff" onchange="cambiarColorCarpetas()"></div>
-                <div class="dropdown-item"><label>Opacidad</label><input type="range" id="opacidadCarpetas" min="10" max="100" value="40" oninput="cambiarColorCarpetas()"></div>
-                <button class="btn-guardar-config" onclick="guardarConfig('carpetas')">💾 Guardar carpetas</button>
-            </div>
-        </div>
+        <button class="btn-subir" id="btnSubirNav" onclick="abrirModalSubir()" style="display:none; padding:6px 14px; font-size:13px; margin:0; border-radius:6px;">⬆️ Subir</button>
+        <button class="btn-login-nav" id="btnIniciarSesion" onclick="abrirLogin()">🔐 Iniciar sesión</button>
+        <button class="btn-login-nav" id="btnCerrarSesion" style="display:none" onclick="cerrarSesion()">🚪 Salir</button>
     </div>
 </nav>
 
-<!-- ══ CONTENIDO ══ -->
 <div class="contenido">
     <h1 id="titulo">📷 Mis Fotos Familiares</h1>
-
-    <!-- Botón subir -->
-    <button class="btn-subir" onclick="abrirModalSubir()">
-        ⬆️ Subir foto o video
-    </button>
-
     <div class="seccion-titulo">📁 Álbumes</div>
     <div class="carpetas-grid" id="carpetasGrid"></div>
-
     <div class="seccion-titulo">🖼️ Fotos en el escritorio</div>
+    <div id="cargandoGaleria" class="cargando"><div class="spinner"></div><p>Cargando fotos...</p></div>
     <div class="galeria cuadricula" id="galeria"></div>
     <div class="paginacion" id="paginacion"></div>
     <button class="btn-ver-mas" id="btnVerMas" onclick="verMas()">Ver más ▼</button>
 </div>
 
-<!-- ══ MODAL SUBIR ══ -->
 <div class="modal-subir" id="modalSubir">
     <div class="modal-subir-contenido">
         <span class="modal-subir-cerrar" onclick="cerrarModalSubir()">✕</span>
@@ -254,15 +276,12 @@
             <label>Selecciona foto o video</label>
             <input type="file" id="archivoSubir" accept="image/*,video/*" multiple>
         </div>
-        <div class="progress-bar" id="progressBar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
+        <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
         <div class="upload-status" id="uploadStatus"></div>
         <button class="btn-upload-confirm" id="btnConfirmarSubir" onclick="subirArchivo()">⬆️ Subir</button>
     </div>
 </div>
 
-<!-- ══ MODAL MOVER ══ -->
 <div class="modal-mover" id="modalMover">
     <div class="modal-mover-contenido">
         <h3>🔀 Mover a...</h3>
@@ -278,7 +297,17 @@
     </div>
 </div>
 
-<!-- ══ MODAL CARPETA ══ -->
+<div class="modal-confirmar" id="modalConfirmar">
+    <div class="modal-confirmar-contenido">
+        <h3>🗑️ Eliminar</h3>
+        <p>¿Estás seguro que quieres eliminar este archivo? Esta acción no se puede deshacer.</p>
+        <div class="modal-confirmar-btns">
+            <button class="btn-cancelar-eliminar" onclick="cerrarModalConfirmar()">Cancelar</button>
+            <button class="btn-confirmar-eliminar" onclick="confirmarEliminar()">Eliminar</button>
+        </div>
+    </div>
+</div>
+
 <div class="modal" id="modal">
     <div class="modal-contenido">
         <div class="modal-header">
@@ -289,7 +318,6 @@
     </div>
 </div>
 
-<!-- ══ LIGHTBOX ══ -->
 <div class="lightbox" id="lightbox">
     <span class="lb-cerrar" onclick="cerrarLightbox()">✕</span>
     <span class="lb-nav izq" onclick="cambiarFoto(-1)">&#10094;</span>
@@ -301,21 +329,24 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ══ CLOUDINARY CONFIG ══
+const PASS_ADMIN = 'Philofran1580!!';
+const PASS_FAMILIAR = 'Familia';
 const CLOUD_NAME = 'dnvxaos89';
 const UPLOAD_PRESET = 'mifamilia';
 const API_KEY = '259213244362344';
+const API_SECRET = 'wU5Met-Qxj4NTsaL58FptTONQqM';
 
-// ══ ESTRUCTURA DE DATOS ══
-// carpeta "" = escritorio
-let mediaData = {
-    escritorio: [],
-    carpetas: {
-        "Cumpleaños": [],
-        "Reuniones familiares": []
-    }
+// Tags para cada destino
+const TAGS = {
+    'escritorio': 'escritorio',
+    'Cumpleaños': 'cumpleanos',
+    'Reuniones familiares': 'reuniones_familiares'
 };
 
+let mediaData = {
+    escritorio: [],
+    carpetas: { "Cumpleaños": [], "Reuniones familiares": [] }
+};
 let config = {};
 let fotosLightbox = [];
 let fotoActual = 0;
@@ -324,76 +355,104 @@ let fotosPorPagina = 9;
 let fotosVisibles = 9;
 let modoVista = "paginas";
 let itemParaMover = null;
-let carpetaActualModal = null;
+let moverDesdeCarpeta = null;
+let itemParaEliminar = null;
+let eliminarDesdeCarpeta = null;
+let rolActual = null;
 
-// ══ CARGAR AL INICIO ══
 Promise.all([
-    fetch('config.json').then(r => r.json()),
+    fetch('config.json').then(r => r.json()).catch(() => ({})),
     cargarMediaDeCloudinary()
 ]).then(([cfg]) => {
-    config = cfg;
+    config = cfg || {};
     aplicarConfig();
     renderizarCarpetas();
     renderizar();
+    document.getElementById('cargandoGaleria').style.display = 'none';
 });
 
-// ══ CARGAR MEDIA DE CLOUDINARY ══
+// ── CARGAR FOTOS POR TAG (funciona en GitHub Pages) ──
 async function cargarMediaDeCloudinary() {
-    try {
-        // Cargar escritorio
-        const resEsc = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/escritorio.json`);
-        if (resEsc.ok) {
-            const data = await resEsc.json();
-            mediaData.escritorio = data.resources.map(r => ({
-                public_id: r.public_id,
-                url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}`,
-                tipo: 'imagen'
-            }));
-        }
-    } catch(e) {}
+    const secciones = [
+        { nombre: 'escritorio', tag: 'escritorio' },
+        { nombre: 'Cumpleaños', tag: 'cumpleanos' },
+        { nombre: 'Reuniones familiares', tag: 'reuniones_familiares' }
+    ];
 
-    try {
-        // Cargar videos escritorio
-        const resVid = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/video/list/escritorio.json`);
-        if (resVid.ok) {
-            const data = await resVid.json();
-            mediaData.escritorio = [...mediaData.escritorio, ...data.resources.map(r => ({
-                public_id: r.public_id,
-                url: `https://res.cloudinary.com/${CLOUD_NAME}/video/upload/${r.public_id}`,
-                tipo: 'video'
-            }))];
-        }
-    } catch(e) {}
-
-    // Cargar carpetas
-    for (const carpeta of Object.keys(mediaData.carpetas)) {
-        const tag = carpeta.toLowerCase().replace(/\s+/g, '_');
+    for (const s of secciones) {
+        // Imágenes
         try {
-            const res = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${tag}.json`);
+            const res = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/image/list/${s.tag}.json`);
             if (res.ok) {
                 const data = await res.json();
-                mediaData.carpetas[carpeta] = data.resources.map(r => ({
+                const items = (data.resources || []).map(r => ({
                     public_id: r.public_id,
                     url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${r.public_id}`,
                     tipo: 'imagen'
                 }));
+                if (s.nombre === 'escritorio') mediaData.escritorio = [...mediaData.escritorio, ...items];
+                else mediaData.carpetas[s.nombre] = [...(mediaData.carpetas[s.nombre] || []), ...items];
             }
         } catch(e) {}
+
+        // Videos
         try {
-            const resV = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/video/list/${tag}.json`);
+            const resV = await fetch(`https://res.cloudinary.com/${CLOUD_NAME}/video/list/${s.tag}.json`);
             if (resV.ok) {
                 const data = await resV.json();
-                mediaData.carpetas[carpeta] = [...mediaData.carpetas[carpeta], ...data.resources.map(r => ({
+                const items = (data.resources || []).map(r => ({
                     public_id: r.public_id,
                     url: `https://res.cloudinary.com/${CLOUD_NAME}/video/upload/${r.public_id}`,
                     tipo: 'video'
-                }))];
+                }));
+                if (s.nombre === 'escritorio') mediaData.escritorio = [...mediaData.escritorio, ...items];
+                else mediaData.carpetas[s.nombre] = [...(mediaData.carpetas[s.nombre] || []), ...items];
             }
         } catch(e) {}
     }
 }
 
-// ══ SUBIR ARCHIVO ══
+// ── LOGIN ──
+function abrirLogin() {
+    document.getElementById('loginInput').value = '';
+    document.getElementById('loginError').style.display = 'none';
+    document.getElementById('loginOverlay').classList.add('activo');
+    setTimeout(() => document.getElementById('loginInput').focus(), 100);
+}
+function cerrarLogin() { document.getElementById('loginOverlay').classList.remove('activo'); }
+function verificarLogin() {
+    const pass = document.getElementById('loginInput').value;
+    if (pass === PASS_ADMIN) { rolActual = 'admin'; aplicarRol(); cerrarLogin(); mostrarToast('✅ Bienvenido Administrador'); }
+    else if (pass === PASS_FAMILIAR) { rolActual = 'familiar'; aplicarRol(); cerrarLogin(); mostrarToast('✅ Bienvenido familiar'); }
+    else { document.getElementById('loginError').style.display = 'block'; }
+}
+function cerrarSesion() { rolActual = null; aplicarRol(); mostrarToast('👋 Sesión cerrada'); }
+function aplicarRol() {
+    const menuAdmin = document.getElementById('menuAdmin');
+    const btnSubirNav = document.getElementById('btnSubirNav');
+    const btnIniciarSesion = document.getElementById('btnIniciarSesion');
+    const btnCerrarSesion = document.getElementById('btnCerrarSesion');
+    if (rolActual === 'admin') {
+        menuAdmin.classList.remove('oculto'); menuAdmin.style.display = 'flex';
+        btnSubirNav.style.display = 'flex';
+        btnIniciarSesion.style.display = 'none';
+        btnCerrarSesion.style.display = 'block';
+    } else if (rolActual === 'familiar') {
+        menuAdmin.classList.add('oculto');
+        btnSubirNav.style.display = 'flex';
+        btnIniciarSesion.style.display = 'none';
+        btnCerrarSesion.style.display = 'block';
+    } else {
+        menuAdmin.classList.add('oculto');
+        btnSubirNav.style.display = 'none';
+        btnIniciarSesion.style.display = 'block';
+        btnCerrarSesion.style.display = 'none';
+    }
+    renderizarCarpetas();
+    renderizar();
+}
+
+// ── SUBIR ──
 function abrirModalSubir() { document.getElementById('modalSubir').classList.add('activo'); }
 function cerrarModalSubir() { document.getElementById('modalSubir').classList.remove('activo'); }
 
@@ -401,13 +460,12 @@ async function subirArchivo() {
     const archivos = document.getElementById('archivoSubir').files;
     const destino = document.getElementById('destinoSubir').value;
     if (!archivos.length) { mostrarToast('⚠️ Selecciona un archivo'); return; }
-
     const btn = document.getElementById('btnConfirmarSubir');
     btn.disabled = true;
     document.getElementById('progressBar').style.display = 'block';
     document.getElementById('progressFill').style.width = '0%';
 
-    const tag = destino === 'escritorio' ? 'escritorio' : destino.toLowerCase().replace(/\s+/g, '_');
+    const tag = TAGS[destino] || 'escritorio';
     let subidos = 0;
 
     for (const archivo of archivos) {
@@ -416,86 +474,76 @@ async function subirArchivo() {
         formData.append('file', archivo);
         formData.append('upload_preset', UPLOAD_PRESET);
         formData.append('tags', tag);
-        formData.append('folder', tag);
-
-        const tipo = esVideo ? 'video' : 'image';
         document.getElementById('uploadStatus').textContent = `Subiendo ${archivo.name}...`;
-
         try {
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${tipo}/upload`, {
-                method: 'POST',
-                body: formData
-            });
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${esVideo ? 'video' : 'image'}/upload`, { method: 'POST', body: formData });
             const data = await res.json();
-
             if (data.secure_url) {
                 const item = { public_id: data.public_id, url: data.secure_url, tipo: esVideo ? 'video' : 'imagen' };
-                if (destino === 'escritorio') {
-                    mediaData.escritorio.unshift(item);
-                } else {
-                    mediaData.carpetas[destino].unshift(item);
-                }
+                if (destino === 'escritorio') mediaData.escritorio.unshift(item);
+                else mediaData.carpetas[destino].unshift(item);
                 subidos++;
             }
         } catch(e) {}
-
-        const pct = Math.round((subidos / archivos.length) * 100);
-        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressFill').style.width = Math.round((subidos / archivos.length) * 100) + '%';
     }
-
     btn.disabled = false;
     document.getElementById('uploadStatus').textContent = `✅ ${subidos} archivo(s) subido(s)`;
-    renderizarCarpetas();
-    renderizar();
+    renderizarCarpetas(); renderizar();
     setTimeout(() => {
         cerrarModalSubir();
         document.getElementById('progressBar').style.display = 'none';
         document.getElementById('uploadStatus').textContent = '';
         document.getElementById('archivoSubir').value = '';
     }, 1500);
-    mostrarToast(`✅ ${subidos} archivo(s) subido(s) correctamente`);
+    mostrarToast(`✅ ${subidos} archivo(s) subido(s)`);
 }
 
-// ══ MOVER FOTO ══
-let moverDesdeCarpeta = null;
-
-function abrirModalMover(item, desdeCarpeta) {
-    itemParaMover = item;
-    moverDesdeCarpeta = desdeCarpeta;
-    document.getElementById('modalMover').classList.add('activo');
+// ── ELIMINAR ──
+function abrirModalConfirmar(item, desdeCarpeta) {
+    itemParaEliminar = item;
+    eliminarDesdeCarpeta = desdeCarpeta;
+    document.getElementById('modalConfirmar').classList.add('activo');
+}
+function cerrarModalConfirmar() { document.getElementById('modalConfirmar').classList.remove('activo'); itemParaEliminar = null; }
+async function confirmarEliminar() {
+    if (!itemParaEliminar) return;
+    try {
+        const timestamp = Math.round(Date.now() / 1000);
+        const str = `public_id=${itemParaEliminar.public_id}&timestamp=${timestamp}${API_SECRET}`;
+        const formData = new FormData();
+        formData.append('public_id', itemParaEliminar.public_id);
+        formData.append('api_key', API_KEY);
+        formData.append('timestamp', timestamp);
+        const tipo = itemParaEliminar.tipo === 'video' ? 'video' : 'image';
+        await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${tipo}/destroy`, { method: 'POST', body: formData });
+    } catch(e) {}
+    if (eliminarDesdeCarpeta === 'escritorio') {
+        mediaData.escritorio = mediaData.escritorio.filter(i => i.public_id !== itemParaEliminar.public_id);
+    } else {
+        mediaData.carpetas[eliminarDesdeCarpeta] = mediaData.carpetas[eliminarDesdeCarpeta].filter(i => i.public_id !== itemParaEliminar.public_id);
+    }
+    cerrarModalConfirmar(); cerrarModal();
+    renderizarCarpetas(); renderizar();
+    mostrarToast('🗑️ Archivo eliminado');
 }
 
-function cerrarModalMover() {
-    document.getElementById('modalMover').classList.remove('activo');
-    itemParaMover = null;
-}
-
+// ── MOVER ──
+function abrirModalMover(item, desde) { itemParaMover = item; moverDesdeCarpeta = desde; document.getElementById('modalMover').classList.add('activo'); }
+function cerrarModalMover() { document.getElementById('modalMover').classList.remove('activo'); itemParaMover = null; }
 function confirmarMover() {
     const destino = document.getElementById('destinoMover').value;
     if (!itemParaMover) return;
-
-    // Quitar de origen
-    if (moverDesdeCarpeta === 'escritorio') {
-        mediaData.escritorio = mediaData.escritorio.filter(i => i.public_id !== itemParaMover.public_id);
-    } else {
-        mediaData.carpetas[moverDesdeCarpeta] = mediaData.carpetas[moverDesdeCarpeta].filter(i => i.public_id !== itemParaMover.public_id);
-    }
-
-    // Agregar a destino
-    if (destino === 'escritorio') {
-        mediaData.escritorio.unshift(itemParaMover);
-    } else {
-        mediaData.carpetas[destino].unshift(itemParaMover);
-    }
-
-    cerrarModalMover();
-    cerrarModal();
-    renderizarCarpetas();
-    renderizar();
-    mostrarToast('✅ Foto movida correctamente');
+    if (moverDesdeCarpeta === 'escritorio') mediaData.escritorio = mediaData.escritorio.filter(i => i.public_id !== itemParaMover.public_id);
+    else mediaData.carpetas[moverDesdeCarpeta] = mediaData.carpetas[moverDesdeCarpeta].filter(i => i.public_id !== itemParaMover.public_id);
+    if (destino === 'escritorio') mediaData.escritorio.unshift(itemParaMover);
+    else mediaData.carpetas[destino].unshift(itemParaMover);
+    cerrarModalMover(); cerrarModal();
+    renderizarCarpetas(); renderizar();
+    mostrarToast('✅ Movido correctamente');
 }
 
-// ══ CARPETAS ══
+// ── CARPETAS ──
 function renderizarCarpetas() {
     const grid = document.getElementById("carpetasGrid");
     grid.innerHTML = "";
@@ -505,33 +553,26 @@ function renderizarCarpetas() {
     const g = parseInt(colorCarp.slice(3,5),16);
     const b = parseInt(colorCarp.slice(5,7),16);
     const bg = `rgba(${r},${g},${b},${op})`;
-
     Object.entries(mediaData.carpetas).forEach(([nombre, items]) => {
         const div = document.createElement("div");
         div.className = "carpeta";
         div.style.background = bg;
-        div.innerHTML = `
-            <div class="carpeta-icono">📁</div>
-            <div class="carpeta-nombre">${nombre}</div>
-            <div class="carpeta-conteo">${items.length} elemento${items.length !== 1 ? 's' : ''}</div>
-        `;
+        div.innerHTML = `<div class="carpeta-icono">📁</div><div class="carpeta-nombre">${nombre}</div><div class="carpeta-conteo">${items.length} elemento${items.length !== 1 ? 's' : ''}</div>`;
         div.onclick = () => abrirCarpeta(nombre, items);
         grid.appendChild(div);
     });
 }
 
 function abrirCarpeta(nombre, items) {
-    carpetaActualModal = nombre;
     document.getElementById("modalTitulo").textContent = "📁 " + nombre;
     const gm = document.getElementById("galeriaModal");
     gm.innerHTML = "";
     fotosLightbox = items;
-
     items.forEach((item, i) => {
         const div = document.createElement("div");
         div.className = "galeria-modal-item";
         if (item.tipo === 'video') {
-            div.innerHTML = `<div class="video-thumb" onclick="abrirLightbox(${i}, fotosLightbox)">🎬</div>`;
+            div.innerHTML = `<div class="video-thumb" style="height:170px;border-radius:8px;" onclick="abrirLightbox(${i}, fotosLightbox)">🎬</div>`;
         } else {
             const img = document.createElement("img");
             img.src = item.url;
@@ -539,38 +580,34 @@ function abrirCarpeta(nombre, items) {
             img.onclick = () => abrirLightbox(i, items);
             div.appendChild(img);
         }
-        const acciones = document.createElement("div");
-        acciones.className = "item-acciones";
-        acciones.innerHTML = `<button class="item-btn" onclick="event.stopPropagation();abrirModalMover(fotosLightbox[${i}], '${nombre}')">🔀 Mover</button>`;
-        div.appendChild(acciones);
+        if (rolActual === 'admin') {
+            const acc = document.createElement("div");
+            acc.className = "item-acciones";
+            acc.innerHTML = `
+                <button class="item-btn" onclick="event.stopPropagation();abrirModalMover(fotosLightbox[${i}],'${nombre}')">🔀</button>
+                <button class="item-btn rojo" onclick="event.stopPropagation();abrirModalConfirmar(fotosLightbox[${i}],'${nombre}')">🗑️</button>
+            `;
+            div.appendChild(acc);
+        }
         gm.appendChild(div);
     });
     document.getElementById("modal").classList.add("activo");
 }
-
 function cerrarModal() { document.getElementById("modal").classList.remove("activo"); }
 
-// ══ GALERÍA ESCRITORIO ══
+// ── GALERÍA ──
 function renderizar() {
     const galeria = document.getElementById("galeria");
     galeria.innerHTML = "";
-    let items = mediaData.escritorio;
-    let itemsAMostrar = [];
-
-    if (modoVista === "paginas") {
-        const inicio = (paginaActual - 1) * fotosPorPagina;
-        itemsAMostrar = items.slice(inicio, inicio + fotosPorPagina);
-    } else {
-        itemsAMostrar = items.slice(0, fotosVisibles);
-    }
-
+    const items = mediaData.escritorio;
+    let itemsAMostrar = modoVista === "paginas"
+        ? items.slice((paginaActual - 1) * fotosPorPagina, paginaActual * fotosPorPagina)
+        : items.slice(0, fotosVisibles);
     fotosLightbox = items;
-
     itemsAMostrar.forEach((item, i) => {
         const indexReal = modoVista === "paginas" ? (paginaActual - 1) * fotosPorPagina + i : i;
         const div = document.createElement("div");
         div.className = "galeria-item";
-
         if (item.tipo === 'video') {
             div.innerHTML = `<div class="video-thumb" onclick="abrirLightbox(${indexReal}, mediaData.escritorio)">🎬</div>`;
         } else {
@@ -580,14 +617,17 @@ function renderizar() {
             img.onclick = () => abrirLightbox(indexReal, mediaData.escritorio);
             div.appendChild(img);
         }
-
-        const acciones = document.createElement("div");
-        acciones.className = "item-acciones";
-        acciones.innerHTML = `<button class="item-btn" onclick="event.stopPropagation();abrirModalMover(mediaData.escritorio[${indexReal}], 'escritorio')">🔀 Mover</button>`;
-        div.appendChild(acciones);
+        if (rolActual === 'admin') {
+            const acc = document.createElement("div");
+            acc.className = "item-acciones";
+            acc.innerHTML = `
+                <button class="item-btn" onclick="event.stopPropagation();abrirModalMover(mediaData.escritorio[${indexReal}],'escritorio')">🔀</button>
+                <button class="item-btn rojo" onclick="event.stopPropagation();abrirModalConfirmar(mediaData.escritorio[${indexReal}],'escritorio')">🗑️</button>
+            `;
+            div.appendChild(acc);
+        }
         galeria.appendChild(div);
     });
-
     if (modoVista === "paginas") {
         renderizarPaginacion();
         document.getElementById("btnVerMas").style.display = "none";
@@ -618,32 +658,19 @@ function renderizarPaginacion() {
     next.onclick = () => { if (paginaActual < total) { paginaActual++; renderizar(); } };
     pag.appendChild(next);
 }
-
 function verMas() { fotosVisibles += fotosPorPagina; renderizar(); }
 
-// ══ LIGHTBOX ══
+// ── LIGHTBOX ──
 function abrirLightbox(index, lista) {
-    fotoActual = index;
-    fotosLightbox = lista;
+    fotoActual = index; fotosLightbox = lista;
     const item = fotosLightbox[fotoActual];
     const img = document.getElementById("lightboxImg");
     const vid = document.getElementById("lightboxVideo");
-    if (item.tipo === 'video') {
-        img.style.display = 'none';
-        vid.style.display = 'block';
-        vid.src = item.url;
-    } else {
-        vid.style.display = 'none';
-        vid.src = '';
-        img.style.display = 'block';
-        img.src = item.url;
-    }
+    if (item.tipo === 'video') { img.style.display = 'none'; vid.style.display = 'block'; vid.src = item.url; }
+    else { vid.style.display = 'none'; vid.src = ''; img.style.display = 'block'; img.src = item.url; }
     document.getElementById("lightbox").classList.add("activo");
 }
-function cerrarLightbox() {
-    document.getElementById("lightbox").classList.remove("activo");
-    document.getElementById("lightboxVideo").src = '';
-}
+function cerrarLightbox() { document.getElementById("lightbox").classList.remove("activo"); document.getElementById("lightboxVideo").src = ''; }
 function cambiarFoto(dir) {
     fotoActual += dir;
     if (fotoActual < 0) fotoActual = fotosLightbox.length - 1;
@@ -651,7 +678,7 @@ function cambiarFoto(dir) {
     abrirLightbox(fotoActual, fotosLightbox);
 }
 
-// ══ APLICAR CONFIG ══
+// ── CONFIG ──
 function aplicarConfig() {
     if (!config.titulo) return;
     const t = document.getElementById('titulo');
@@ -663,7 +690,6 @@ function aplicarConfig() {
     document.getElementById('tamanoTitulo').value = config.titulo.tamano || '36';
     document.getElementById('fuenteTitulo').value = config.titulo.fuente || 'Arial';
     document.getElementById('disenoTitulo').value = config.titulo.diseno || 'normal';
-
     if (config.fondo) {
         document.getElementById('tipoFondo').value = config.fondo.tipo || 'degradado';
         document.getElementById('color1').value = config.fondo.color1 || '#ffecd2';
@@ -672,7 +698,6 @@ function aplicarConfig() {
         if (config.fondo.tipo === 'degradado') document.body.style.background = `linear-gradient(135deg, ${config.fondo.color1}, ${config.fondo.color2})`;
         else if (config.fondo.tipo === 'solido') document.body.style.background = config.fondo.colorSolido;
     }
-
     if (config.fotos) {
         document.getElementById('formaFotos').value = config.fotos.forma || 'cuadricula';
         document.getElementById('fotosPorPagina').value = config.fotos.porPagina || '9';
@@ -681,43 +706,23 @@ function aplicarConfig() {
         fotosPorPagina = parseInt(config.fotos.porPagina || '9');
         modoVista = config.fotos.vista || 'paginas';
     }
-
     if (config.carpetas) {
         document.getElementById('colorCarpetas').value = config.carpetas.color || '#ffffff';
         document.getElementById('opacidadCarpetas').value = config.carpetas.opacidad || '40';
     }
 }
 
-// ══ GUARDAR CONFIG ══
 function guardarConfig(seccion) {
     if (!config.titulo) config = { titulo: {}, fondo: {}, fotos: {}, carpetas: {} };
-    if (seccion === 'titulo') {
-        config.titulo.color = document.getElementById('colorTitulo').value;
-        config.titulo.tamano = document.getElementById('tamanoTitulo').value;
-        config.titulo.fuente = document.getElementById('fuenteTitulo').value;
-        config.titulo.diseno = document.getElementById('disenoTitulo').value;
-    } else if (seccion === 'fondo') {
-        config.fondo.tipo = document.getElementById('tipoFondo').value;
-        config.fondo.color1 = document.getElementById('color1').value;
-        config.fondo.color2 = document.getElementById('color2').value;
-        config.fondo.colorSolido = document.getElementById('colorSolido') ? document.getElementById('colorSolido').value : '#ffecd2';
-    } else if (seccion === 'fotos') {
-        config.fotos.forma = document.getElementById('formaFotos').value;
-        config.fotos.porPagina = document.getElementById('fotosPorPagina').value;
-        config.fotos.vista = document.getElementById('modoVista').value;
-    } else if (seccion === 'carpetas') {
-        config.carpetas.color = document.getElementById('colorCarpetas').value;
-        config.carpetas.opacidad = document.getElementById('opacidadCarpetas').value;
-    }
+    if (seccion === 'titulo') { config.titulo.color = document.getElementById('colorTitulo').value; config.titulo.tamano = document.getElementById('tamanoTitulo').value; config.titulo.fuente = document.getElementById('fuenteTitulo').value; config.titulo.diseno = document.getElementById('disenoTitulo').value; }
+    else if (seccion === 'fondo') { config.fondo.tipo = document.getElementById('tipoFondo').value; config.fondo.color1 = document.getElementById('color1').value; config.fondo.color2 = document.getElementById('color2').value; config.fondo.colorSolido = document.getElementById('colorSolido') ? document.getElementById('colorSolido').value : '#ffecd2'; }
+    else if (seccion === 'fotos') { config.fotos.forma = document.getElementById('formaFotos').value; config.fotos.porPagina = document.getElementById('fotosPorPagina').value; config.fotos.vista = document.getElementById('modoVista').value; }
+    else if (seccion === 'carpetas') { config.carpetas.color = document.getElementById('colorCarpetas').value; config.carpetas.opacidad = document.getElementById('opacidadCarpetas').value; }
     const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'config.json';
-    a.click();
-    mostrarToast('✅ config.json descargado — súbelo a Netlify para guardar permanentemente');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'config.json'; a.click();
+    mostrarToast('✅ config.json descargado — súbelo a GitHub para guardar');
 }
 
-// ══ CONTROLES ══
 function cambiarColor() { document.getElementById("titulo").style.color = document.getElementById("colorTitulo").value; }
 function cambiarTamano() { document.getElementById("titulo").style.fontSize = document.getElementById("tamanoTitulo").value + "px"; }
 function cambiarFuente() { document.getElementById("titulo").style.fontFamily = document.getElementById("fuenteTitulo").value; }
@@ -743,19 +748,13 @@ function mostrarOpcionesFondo() {
 }
 function aplicarDegradado() { document.body.style.background = `linear-gradient(135deg, ${document.getElementById("color1").value}, ${document.getElementById("color2").value})`; }
 function aplicarSolido() { document.body.style.background = document.getElementById("colorSolido").value; }
-function mostrarToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.style.display = 'block';
-    setTimeout(() => t.style.display = 'none', 4000);
-}
+function mostrarToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 4000); }
 
 document.addEventListener("keydown", e => {
-    if (e.key === "Escape") { cerrarLightbox(); cerrarModal(); cerrarModalSubir(); cerrarModalMover(); }
+    if (e.key === "Escape") { cerrarLightbox(); cerrarModal(); cerrarModalSubir(); cerrarModalMover(); cerrarLogin(); cerrarModalConfirmar(); }
     if (e.key === "ArrowRight") cambiarFoto(1);
     if (e.key === "ArrowLeft") cambiarFoto(-1);
 });
 </script>
 </body>
 </html>
-
