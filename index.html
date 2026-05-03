@@ -9,7 +9,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial, sans-serif; min-height: 100vh; background: linear-gradient(135deg, #ffecd2, #fcb69f); transition: background 0.5s; }
 
-        /* LOGIN */
         .login-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 99999; justify-content: center; align-items: center; }
         .login-overlay.activo { display: flex; }
         .login-box { background: white; border-radius: 20px; padding: 36px; max-width: 380px; width: 95%; box-shadow: 0 12px 48px rgba(0,0,0,0.25); text-align: center; }
@@ -22,11 +21,10 @@
         .pass-wrapper input:focus { border-color: #8B4513; }
         .pass-ojo { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; color: #aaa; user-select: none; }
         .pass-ojo:hover { color: #8B4513; }
-        .login-box button.btn-entrar { width: 100%; padding: 12px; background: #8B4513; color: white; border: none; border-radius: 9px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-        .login-box button.btn-entrar:hover { background: #a0522d; }
+        .btn-entrar { width: 100%; padding: 12px; background: #8B4513; color: white; border: none; border-radius: 9px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .btn-entrar:hover { background: #a0522d; }
         .login-error { color: #cc0000; font-size: 12px; margin-top: 10px; display: none; }
 
-        /* NAVBAR */
         .navbar { background: rgba(139,69,19,0.93); backdrop-filter: blur(8px); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; box-shadow: 0 2px 14px rgba(0,0,0,0.22); position: sticky; top: 0; z-index: 100; }
         .navbar-brand { color: white; font-size: 17px; font-weight: bold; letter-spacing: 0.5px; }
         .navbar-menu { display: flex; gap: 4px; align-items: center; }
@@ -35,7 +33,6 @@
         .btn-login-nav { background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); color: white; font-size: 12px; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
         .btn-login-nav:hover { background: rgba(255,255,255,0.24); }
 
-        /* DROPDOWN */
         .dropdown { position: relative; }
         .dropdown-menu { display: none; position: absolute; top: calc(100% + 4px); right: 0; background: white; border-radius: 12px; box-shadow: 0 8px 28px rgba(0,0,0,0.14); padding: 10px; min-width: 240px; z-index: 300; }
         .dropdown:hover .dropdown-menu { display: block; }
@@ -50,16 +47,13 @@
         .btn-guardar-cfg { display: block; width: 100%; margin-top: 8px; padding: 9px; background: #8B4513; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: bold; transition: background 0.2s; }
         .btn-guardar-cfg:hover { background: #a0522d; }
 
-        /* CONTENIDO */
         .contenido { max-width: 960px; margin: 0 auto; padding: 28px 20px; }
         h1 { text-align: center; color: #8B4513; font-size: 36px; margin-bottom: 26px; transition: all 0.3s; }
         .seccion-titulo { font-size: 12px; font-weight: bold; color: #8B4513; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 14px; border-left: 3px solid #8B4513; padding-left: 9px; }
 
-        /* BOTÓN SUBIR */
         .btn-subir { display: inline-flex; align-items: center; gap: 8px; background: #8B4513; color: white; border: none; border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: bold; cursor: pointer; margin-bottom: 22px; transition: background 0.2s, transform 0.1s; }
         .btn-subir:hover { background: #a0522d; transform: translateY(-1px); }
 
-        /* MODAL SUBIR */
         .modal-subir { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9000; justify-content: center; align-items: center; }
         .modal-subir.activo { display: flex; }
         .modal-subir-caja { background: white; border-radius: 20px; padding: 30px; max-width: 490px; width: 95%; box-shadow: 0 12px 44px rgba(0,0,0,0.22); }
@@ -76,7 +70,6 @@
         .progress-fill { height: 100%; background: #8B4513; border-radius: 4px; transition: width 0.3s; width: 0%; }
         .upload-status { font-size: 13px; color: #777; margin-top: 9px; text-align: center; min-height: 18px; }
 
-        /* CARPETAS */
         .carpetas-grid { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 30px; }
         .carpeta { display: flex; flex-direction: column; align-items: center; cursor: pointer; width: 104px; padding: 12px 8px; border-radius: 14px; background: rgba(255,255,255,0.42); transition: transform 0.2s, background 0.2s; }
         .carpeta:hover { transform: scale(1.07); background: rgba(255,255,255,0.68); }
@@ -84,7 +77,6 @@
         .carpeta-nombre { font-size: 12px; font-weight: bold; color: #5a3010; text-align: center; margin-top: 7px; word-break: break-word; }
         .carpeta-conteo { font-size: 11px; color: #aaa; margin-top: 3px; }
 
-        /* GALERÍA */
         .galeria { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
         .galeria.grande { grid-template-columns: repeat(2, 1fr); }
         .galeria.circulos .galeria-item img { border-radius: 50% !important; height: 190px !important; width: 190px !important; justify-self: center; }
@@ -100,7 +92,6 @@
         .galeria img:hover { transform: scale(1.03); }
         .video-thumb { width: 100%; height: 200px; border-radius: 10px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 52px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.16); }
 
-        /* PAGINACIÓN */
         .paginacion { display: flex; justify-content: center; gap: 6px; margin: 24px 0; flex-wrap: wrap; }
         .paginacion button { padding: 7px 14px; border: none; border-radius: 8px; background: rgba(255,255,255,0.72); color: #8B4513; font-weight: bold; cursor: pointer; font-size: 13px; transition: background 0.2s; }
         .paginacion button.activo { background: #8B4513; color: white; }
@@ -108,7 +99,6 @@
         .btn-ver-mas { display: none; margin: 18px auto; padding: 12px 30px; border: none; border-radius: 12px; background: #8B4513; color: white; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
         .btn-ver-mas:hover { background: #a0522d; }
 
-        /* MODAL CARPETA */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.68); z-index: 8000; justify-content: center; align-items: center; }
         .modal.activo { display: flex; }
         .modal-caja { background: white; border-radius: 20px; padding: 26px; max-width: 870px; width: 95%; max-height: 86vh; overflow-y: auto; box-shadow: 0 12px 44px rgba(0,0,0,0.24); }
@@ -122,7 +112,6 @@
         .galeria-modal img { width: 100%; height: 172px; object-fit: cover; border-radius: 9px; cursor: pointer; transition: transform 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.12); display: block; }
         .galeria-modal img:hover { transform: scale(1.04); }
 
-        /* LIGHTBOX */
         .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); justify-content: center; align-items: center; z-index: 9999; }
         .lightbox.activo { display: flex; }
         .lightbox img { max-width: 92%; max-height: 92%; border-radius: 10px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
@@ -133,7 +122,6 @@
         .lb-nav.izq { left: 18px; }
         .lb-nav.der { right: 18px; }
 
-        /* MODALES MOVER Y CONFIRMAR */
         .modal-mover, .modal-confirmar { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.62); z-index: 9600; justify-content: center; align-items: center; }
         .modal-mover.activo, .modal-confirmar.activo { display: flex; }
         .modal-mover-caja, .modal-confirmar-caja { background: white; border-radius: 16px; padding: 26px; max-width: 360px; width: 95%; box-shadow: 0 10px 40px rgba(0,0,0,0.22); }
@@ -151,14 +139,11 @@
         .btn-eliminar { background: #cc0000; color: white; }
         .btn-eliminar:hover { background: #aa0000; }
 
-        /* TOAST */
         .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #2a6e2a; color: white; padding: 13px 26px; border-radius: 12px; font-size: 14px; font-weight: bold; z-index: 99999; display: none; box-shadow: 0 5px 18px rgba(0,0,0,0.22); white-space: nowrap; }
 
-        /* SPINNER */
         .cargando { text-align: center; padding: 32px; color: #8B4513; }
         .spinner { display: inline-block; width: 42px; height: 42px; border: 4px solid rgba(139,69,19,0.2); border-top-color: #8B4513; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
         .oculto { display: none !important; }
     </style>
 </head>
@@ -183,10 +168,7 @@
 <nav class="navbar">
     <div class="navbar-brand">📷 Mis Fotos Familiares</div>
     <div class="navbar-menu">
-
-        <!-- MENÚ ADMIN -->
         <div id="menuAdmin" class="oculto" style="display:flex; gap:4px;">
-
             <div class="dropdown">
                 <button class="navbar-btn">✏️ Título ▾</button>
                 <div class="dropdown-menu">
@@ -220,7 +202,6 @@
                     <button class="btn-guardar-cfg" onclick="guardarConfig('titulo')">💾 Guardar título</button>
                 </div>
             </div>
-
             <div class="dropdown">
                 <button class="navbar-btn">🖼️ Fotos ▾</button>
                 <div class="dropdown-menu">
@@ -250,7 +231,6 @@
                     <button class="btn-guardar-cfg" onclick="guardarConfig('fotos')">💾 Guardar fotos</button>
                 </div>
             </div>
-
             <div class="dropdown">
                 <button class="navbar-btn">🎨 Fondo ▾</button>
                 <div class="dropdown-menu">
@@ -275,7 +255,6 @@
                     <button class="btn-guardar-cfg" onclick="guardarConfig('fondo')">💾 Guardar fondo</button>
                 </div>
             </div>
-
             <div class="dropdown">
                 <button class="navbar-btn">📁 Carpetas ▾</button>
                 <div class="dropdown-menu">
@@ -284,9 +263,7 @@
                     <button class="btn-guardar-cfg" onclick="guardarConfig('carpetas')">💾 Guardar carpetas</button>
                 </div>
             </div>
-
         </div>
-
         <button class="btn-subir" id="btnSubirNav" onclick="abrirModalSubir()" style="display:none; padding:6px 14px; font-size:13px; margin:0; border-radius:6px;">⬆️ Subir</button>
         <button class="btn-login-nav" id="btnIniciarSesion" onclick="abrirLogin()">🔐 Iniciar sesión</button>
         <button class="btn-login-nav" id="btnCerrarSesion" style="display:none" onclick="cerrarSesion()">🚪 Salir</button>
@@ -296,15 +273,10 @@
 <!-- CONTENIDO -->
 <div class="contenido">
     <h1 id="titulo">📷 Mis Fotos Familiares</h1>
-
     <div class="seccion-titulo">📁 Álbumes</div>
     <div class="carpetas-grid" id="carpetasGrid"></div>
-
     <div class="seccion-titulo">🖼️ Fotos en el escritorio</div>
-    <div id="cargandoGaleria" class="cargando">
-        <div class="spinner"></div>
-        <p>Cargando fotos...</p>
-    </div>
+    <div id="cargandoGaleria" class="cargando"><div class="spinner"></div><p>Cargando fotos...</p></div>
     <div class="galeria cuadricula" id="galeria"></div>
     <div class="paginacion" id="paginacion"></div>
     <button class="btn-ver-mas" id="btnVerMas" onclick="verMas()">Ver más fotos ▼</button>
@@ -385,37 +357,112 @@
 
 <script>
 // ══ CONFIGURACIÓN ══
-const PASS_ADMIN   = 'Philofran1580!!';
+const PASS_ADMIN    = 'Philofran1580!!';
 const PASS_FAMILIAR = 'Familia';
-const CLOUD_NAME   = 'dnvxaos89';
+const CLOUD_NAME    = 'dnvxaos89';
 const UPLOAD_PRESET = 'mifamilia';
-const API_KEY      = '259213244362344';
-const API_SECRET   = 'wU5Met-Qxj4NTsaL58FptTONQqM';
+const API_KEY       = '259213244362344';
+const API_SECRET    = 'wU5Met-Qxj4NTsaL58FptTONQqM';
+const SESSION_DURACION = 30 * 60 * 1000; // 30 minutos en ms
 
-const SECCIONES = [
-    { nombre: 'escritorio',           tag: 'escritorio' },
-    { nombre: 'Cumpleaños',           tag: 'cumpleanos' },
-    { nombre: 'Reuniones familiares', tag: 'reuniones_familiares' }
-];
+const TAG_MAP = {
+    'escritorio':           'escritorio',
+    'Cumpleaños':           'cumpleanos',
+    'Reuniones familiares': 'reuniones_familiares'
+};
 
 // ══ ESTADO ══
 let mediaData = {
     escritorio: [],
     carpetas: { 'Cumpleaños': [], 'Reuniones familiares': [] }
 };
-let config            = {};
-let rolActual         = null;
-let fotosLightbox     = [];
-let fotoActual        = 0;
-let paginaActual      = 1;
-let fotosPorPagina    = 9;
-let fotosVisibles     = 9;
-let modoVista         = 'paginas';
-let itemParaMover     = null;
-let moverDesde        = null;
-let itemParaEliminar  = null;
-let eliminarDesde     = null;
-let fondoImagenURL    = null;
+let config           = {};
+let rolActual        = null;
+let fotosLightbox    = [];
+let fotoActual       = 0;
+let paginaActual     = 1;
+let fotosPorPagina   = 9;
+let fotosVisibles    = 9;
+let modoVista        = 'paginas';
+let itemParaMover    = null;
+let moverDesde       = null;
+let itemParaEliminar = null;
+let eliminarDesde    = null;
+let fondoImagenURL   = null;
+let sessionTimer     = null;
+
+// ══ SESIÓN PERSISTENTE ══
+function guardarSesion(rol) {
+    localStorage.setItem('mfam_rol', rol);
+    localStorage.setItem('mfam_tiempo', Date.now().toString());
+}
+function limpiarSesion() {
+    localStorage.removeItem('mfam_rol');
+    localStorage.removeItem('mfam_tiempo');
+}
+function verificarSesionGuardada() {
+    const rol    = localStorage.getItem('mfam_rol');
+    const tiempo = parseInt(localStorage.getItem('mfam_tiempo') || '0');
+    if (rol && tiempo && (Date.now() - tiempo) < SESSION_DURACION) {
+        rolActual = rol;
+        aplicarRol();
+        iniciarTimerSesion(SESSION_DURACION - (Date.now() - tiempo));
+    }
+}
+function iniciarTimerSesion(ms) {
+    if (sessionTimer) clearTimeout(sessionTimer);
+    sessionTimer = setTimeout(() => {
+        rolActual = null;
+        limpiarSesion();
+        aplicarRol();
+        mostrarToast('⏰ Sesión expirada, por favor inicia sesión de nuevo');
+    }, ms);
+}
+
+// ══ MOVIMIENTOS PERSISTENTES ══
+// Guardamos los movimientos en localStorage para que persistan al refrescar
+function guardarMovimientos() {
+    // Guardamos los public_ids de cada sección para reconstruir el orden correcto
+    const movs = {
+        escritorio: mediaData.escritorio.map(i => i.public_id),
+        carpetas: {}
+    };
+    Object.keys(mediaData.carpetas).forEach(k => {
+        movs.carpetas[k] = mediaData.carpetas[k].map(i => i.public_id);
+    });
+    localStorage.setItem('mfam_movimientos', JSON.stringify(movs));
+}
+
+function cargarMovimientos() {
+    try {
+        const raw = localStorage.getItem('mfam_movimientos');
+        return raw ? JSON.parse(raw) : null;
+    } catch(e) { return null; }
+}
+
+function aplicarMovimientos(movs) {
+    if (!movs) return;
+    // Crear mapa global de todos los items por public_id
+    const mapaGlobal = {};
+    mediaData.escritorio.forEach(i => mapaGlobal[i.public_id] = i);
+    Object.values(mediaData.carpetas).forEach(arr => arr.forEach(i => mapaGlobal[i.public_id] = i));
+
+    // Reconstruir escritorio con el orden guardado
+    if (movs.escritorio && movs.escritorio.length > 0) {
+        const nuevosEsc = movs.escritorio.map(id => mapaGlobal[id]).filter(Boolean);
+        if (nuevosEsc.length > 0) mediaData.escritorio = nuevosEsc;
+    }
+
+    // Reconstruir carpetas con el orden guardado
+    if (movs.carpetas) {
+        Object.keys(movs.carpetas).forEach(k => {
+            if (mediaData.carpetas[k] !== undefined && movs.carpetas[k].length > 0) {
+                const nuevaCarpeta = movs.carpetas[k].map(id => mapaGlobal[id]).filter(Boolean);
+                if (nuevaCarpeta.length > 0) mediaData.carpetas[k] = nuevaCarpeta;
+            }
+        });
+    }
+}
 
 // ══ INICIO ══
 Promise.all([
@@ -423,15 +470,26 @@ Promise.all([
     cargarTodaLaMedia()
 ]).then(([cfg]) => {
     config = cfg || {};
+
+    // Aplicar movimientos guardados
+    const movs = cargarMovimientos();
+    if (movs) aplicarMovimientos(movs);
+
     aplicarConfig();
+    verificarSesionGuardada();
     renderizarCarpetas();
     renderizar();
     document.getElementById('cargandoGaleria').style.display = 'none';
 });
 
-// ══ CARGAR MEDIA DESDE CLOUDINARY ══
+// ══ CARGAR MEDIA ══
 async function cargarTodaLaMedia() {
-    for (const s of SECCIONES) {
+    const secciones = [
+        { nombre: 'escritorio',           tag: 'escritorio' },
+        { nombre: 'Cumpleaños',           tag: 'cumpleanos' },
+        { nombre: 'Reuniones familiares', tag: 'reuniones_familiares' }
+    ];
+    for (const s of secciones) {
         await cargarPorTag(s.nombre, s.tag, 'image');
         await cargarPorTag(s.nombre, s.tag, 'video');
     }
@@ -439,8 +497,8 @@ async function cargarTodaLaMedia() {
 
 async function cargarPorTag(nombre, tag, tipo) {
     try {
-        const url = `https://res.cloudinary.com/${CLOUD_NAME}/${tipo}/list/${tag}.json`;
-        const res = await fetch(url);
+        const url = `https://res.cloudinary.com/${CLOUD_NAME}/${tipo}/list/${tag}.json?_=${Date.now()}`;
+        const res = await fetch(url, { cache: 'no-store' });
         if (!res.ok) return;
         const data = await res.json();
         const recursos = data.resources || [];
@@ -457,20 +515,15 @@ async function cargarPorTag(nombre, tag, tipo) {
             if (!mediaData.carpetas[nombre]) mediaData.carpetas[nombre] = [];
             mediaData.carpetas[nombre].push(...items);
         }
-    } catch(e) { /* silencioso */ }
+    } catch(e) {}
 }
 
 // ══ OJO CONTRASEÑA ══
 function toggleOjo(inputId, ojoId) {
     const inp = document.getElementById(inputId);
     const ojo = document.getElementById(ojoId);
-    if (inp.type === 'password') {
-        inp.type = 'text';
-        ojo.textContent = '🙈';
-    } else {
-        inp.type = 'password';
-        ojo.textContent = '👁️';
-    }
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+    ojo.textContent = inp.type === 'password' ? '👁️' : '🙈';
 }
 
 // ══ LOGIN ══
@@ -488,11 +541,15 @@ function verificarLogin() {
     const pass = document.getElementById('loginInput').value.trim();
     if (pass === PASS_ADMIN) {
         rolActual = 'admin';
+        guardarSesion('admin');
+        iniciarTimerSesion(SESSION_DURACION);
         aplicarRol();
         cerrarLogin();
         mostrarToast('✅ Bienvenido Administrador');
     } else if (pass === PASS_FAMILIAR) {
         rolActual = 'familiar';
+        guardarSesion('familiar');
+        iniciarTimerSesion(SESSION_DURACION);
         aplicarRol();
         cerrarLogin();
         mostrarToast('✅ Bienvenido familiar 👋');
@@ -503,30 +560,32 @@ function verificarLogin() {
 
 function cerrarSesion() {
     rolActual = null;
+    limpiarSesion();
+    if (sessionTimer) clearTimeout(sessionTimer);
     aplicarRol();
     mostrarToast('👋 Sesión cerrada');
 }
 
 function aplicarRol() {
-    const menuAdmin      = document.getElementById('menuAdmin');
-    const btnSubirNav    = document.getElementById('btnSubirNav');
-    const btnIniciar     = document.getElementById('btnIniciarSesion');
-    const btnCerrar      = document.getElementById('btnCerrarSesion');
+    const menuAdmin  = document.getElementById('menuAdmin');
+    const btnSubir   = document.getElementById('btnSubirNav');
+    const btnIniciar = document.getElementById('btnIniciarSesion');
+    const btnCerrar  = document.getElementById('btnCerrarSesion');
 
     if (rolActual === 'admin') {
         menuAdmin.classList.remove('oculto');
         menuAdmin.style.display = 'flex';
-        btnSubirNav.style.display = 'flex';
+        btnSubir.style.display  = 'flex';
         btnIniciar.style.display = 'none';
         btnCerrar.style.display  = 'block';
     } else if (rolActual === 'familiar') {
         menuAdmin.classList.add('oculto');
-        btnSubirNav.style.display = 'flex';
+        btnSubir.style.display   = 'flex';
         btnIniciar.style.display = 'none';
         btnCerrar.style.display  = 'block';
     } else {
         menuAdmin.classList.add('oculto');
-        btnSubirNav.style.display = 'none';
+        btnSubir.style.display   = 'none';
         btnIniciar.style.display = 'block';
         btnCerrar.style.display  = 'none';
     }
@@ -534,7 +593,7 @@ function aplicarRol() {
     renderizar();
 }
 
-// ══ SUBIR ARCHIVOS ══
+// ══ SUBIR ══
 function abrirModalSubir()  { document.getElementById('modalSubir').classList.add('activo'); }
 function cerrarModalSubir() { document.getElementById('modalSubir').classList.remove('activo'); }
 
@@ -543,17 +602,11 @@ async function subirArchivo() {
     const destino  = document.getElementById('destinoSubir').value;
     if (!archivos.length) { mostrarToast('⚠️ Selecciona al menos un archivo'); return; }
 
-    const tagMap = {
-        'escritorio':           'escritorio',
-        'Cumpleaños':           'cumpleanos',
-        'Reuniones familiares': 'reuniones_familiares'
-    };
-    const tag = tagMap[destino] || 'escritorio';
-
-    const btn = document.getElementById('btnConfirmarSubir');
+    const tag  = TAG_MAP[destino] || 'escritorio';
+    const btn  = document.getElementById('btnConfirmarSubir');
     btn.disabled = true;
     document.getElementById('progressBar').style.display = 'block';
-    document.getElementById('progressFill').style.width = '0%';
+    document.getElementById('progressFill').style.width  = '0%';
 
     let subidos = 0;
     const total = archivos.length;
@@ -581,16 +634,16 @@ async function subirArchivo() {
 
     btn.disabled = false;
     document.getElementById('uploadStatus').textContent = `✅ ${subidos} de ${total} archivo(s) subido(s)`;
+    guardarMovimientos();
     renderizarCarpetas();
     renderizar();
 
     setTimeout(() => {
         cerrarModalSubir();
         document.getElementById('progressBar').style.display = 'none';
-        document.getElementById('uploadStatus').textContent = '';
-        document.getElementById('archivoSubir').value = '';
+        document.getElementById('uploadStatus').textContent  = '';
+        document.getElementById('archivoSubir').value        = '';
     }, 2000);
-
     mostrarToast(`✅ ${subidos} archivo(s) subido(s) correctamente`);
 }
 
@@ -621,6 +674,7 @@ async function confirmarEliminar() {
     } else {
         mediaData.carpetas[eliminarDesde] = mediaData.carpetas[eliminarDesde].filter(i => i.public_id !== itemParaEliminar.public_id);
     }
+    guardarMovimientos();
     cerrarModalConfirmar();
     cerrarModal();
     renderizarCarpetas();
@@ -642,18 +696,17 @@ function confirmarMover() {
     const destino = document.getElementById('destinoMover').value;
     if (!itemParaMover) return;
 
-    // Quitar del origen
     if (moverDesde === 'escritorio') {
         mediaData.escritorio = mediaData.escritorio.filter(i => i.public_id !== itemParaMover.public_id);
     } else {
         mediaData.carpetas[moverDesde] = mediaData.carpetas[moverDesde].filter(i => i.public_id !== itemParaMover.public_id);
     }
-    // Agregar al destino
     if (destino === 'escritorio') {
         mediaData.escritorio.unshift(itemParaMover);
     } else {
         mediaData.carpetas[destino].unshift(itemParaMover);
     }
+    guardarMovimientos();
     cerrarModalMover();
     cerrarModal();
     renderizarCarpetas();
@@ -674,9 +727,9 @@ function renderizarCarpetas() {
 
     Object.entries(mediaData.carpetas).forEach(([nombre, items]) => {
         const div = document.createElement('div');
-        div.className   = 'carpeta';
+        div.className        = 'carpeta';
         div.style.background = bg;
-        div.innerHTML   = `
+        div.innerHTML = `
             <div class="carpeta-icono">📁</div>
             <div class="carpeta-nombre">${nombre}</div>
             <div class="carpeta-conteo">${items.length} elemento${items.length !== 1 ? 's' : ''}</div>
@@ -689,7 +742,7 @@ function renderizarCarpetas() {
 function abrirCarpeta(nombre, items) {
     document.getElementById('modalTitulo').textContent = '📁 ' + nombre;
     const gm = document.getElementById('galeriaModal');
-    gm.innerHTML = '';
+    gm.innerHTML  = '';
     fotosLightbox = items;
 
     items.forEach((item, i) => {
@@ -704,9 +757,9 @@ function abrirCarpeta(nombre, items) {
             vt.onclick = () => abrirLightbox(i, fotosLightbox);
             div.appendChild(vt);
         } else {
-            const img = document.createElement('img');
-            img.src   = item.url;
-            img.alt   = 'Foto';
+            const img   = document.createElement('img');
+            img.src     = item.url;
+            img.alt     = 'Foto';
             img.onclick = () => abrirLightbox(i, fotosLightbox);
             div.appendChild(img);
         }
@@ -726,12 +779,12 @@ function abrirCarpeta(nombre, items) {
 }
 function cerrarModal() { document.getElementById('modal').classList.remove('activo'); }
 
-// ══ GALERÍA ESCRITORIO ══
+// ══ GALERÍA ══
 function renderizar() {
     const galeria = document.getElementById('galeria');
     galeria.innerHTML = '';
     const items = mediaData.escritorio;
-    let vista = [];
+    let vista   = [];
 
     if (modoVista === 'paginas') {
         const inicio = (paginaActual - 1) * fotosPorPagina;
@@ -749,14 +802,14 @@ function renderizar() {
 
         if (item.tipo === 'video') {
             const vt = document.createElement('div');
-            vt.className = 'video-thumb';
+            vt.className   = 'video-thumb';
             vt.textContent = '🎬';
-            vt.onclick = () => abrirLightbox(indexReal, mediaData.escritorio);
+            vt.onclick     = () => abrirLightbox(indexReal, mediaData.escritorio);
             div.appendChild(vt);
         } else {
-            const img = document.createElement('img');
-            img.src   = item.url;
-            img.alt   = 'Foto';
+            const img   = document.createElement('img');
+            img.src     = item.url;
+            img.alt     = 'Foto';
             img.onclick = () => abrirLightbox(indexReal, mediaData.escritorio);
             div.appendChild(img);
         }
@@ -807,10 +860,7 @@ function renderizarPaginacion() {
     pag.appendChild(next);
 }
 
-function verMas() {
-    fotosVisibles += fotosPorPagina;
-    renderizar();
-}
+function verMas() { fotosVisibles += fotosPorPagina; renderizar(); }
 
 // ══ LIGHTBOX ══
 function abrirLightbox(index, lista) {
@@ -824,14 +874,9 @@ function mostrarEnLightbox() {
     const img  = document.getElementById('lightboxImg');
     const vid  = document.getElementById('lightboxVideo');
     if (item.tipo === 'video') {
-        img.style.display = 'none';
-        vid.style.display = 'block';
-        vid.src = item.url;
+        img.style.display = 'none'; vid.style.display = 'block'; vid.src = item.url;
     } else {
-        vid.style.display = 'none';
-        vid.src = '';
-        img.style.display = 'block';
-        img.src = item.url;
+        vid.style.display = 'none'; vid.src = ''; img.style.display = 'block'; img.src = item.url;
     }
 }
 function cerrarLightbox() {
@@ -878,29 +923,16 @@ function cambiarDiseno() { aplicarDisenoTitulo(document.getElementById('disenoTi
 function aplicarDisenoTitulo(d) {
     const t = document.getElementById('titulo');
     t.style.textShadow = ''; t.style.textDecoration = ''; t.style.textTransform = ''; t.style.letterSpacing = '';
-    if (d === 'sombra')     t.style.textShadow    = '3px 3px 8px rgba(0,0,0,0.35)';
-    if (d === 'subrayado')  t.style.textDecoration = 'underline';
-    if (d === 'mayusculas') t.style.textTransform  = 'uppercase';
-    if (d === 'espaciado')  t.style.letterSpacing  = '10px';
+    if (d === 'sombra')     t.style.textShadow     = '3px 3px 8px rgba(0,0,0,0.35)';
+    if (d === 'subrayado')  t.style.textDecoration  = 'underline';
+    if (d === 'mayusculas') t.style.textTransform   = 'uppercase';
+    if (d === 'espaciado')  t.style.letterSpacing   = '10px';
 }
 
 // ══ CONTROLES FOTOS ══
-function cambiarForma() {
-    const f = document.getElementById('formaFotos').value;
-    document.getElementById('galeria').className = 'galeria ' + f;
-}
-function cambiarFotosPorPagina() {
-    fotosPorPagina = parseInt(document.getElementById('fotosPorPagina').value);
-    fotosVisibles  = fotosPorPagina;
-    paginaActual   = 1;
-    renderizar();
-}
-function cambiarModoVista() {
-    modoVista    = document.getElementById('modoVista').value;
-    paginaActual = 1;
-    fotosVisibles = fotosPorPagina;
-    renderizar();
-}
+function cambiarForma() { document.getElementById('galeria').className = 'galeria ' + document.getElementById('formaFotos').value; }
+function cambiarFotosPorPagina() { fotosPorPagina = parseInt(document.getElementById('fotosPorPagina').value); fotosVisibles = fotosPorPagina; paginaActual = 1; renderizar(); }
+function cambiarModoVista() { modoVista = document.getElementById('modoVista').value; paginaActual = 1; fotosVisibles = fotosPorPagina; renderizar(); }
 
 // ══ CONTROLES CARPETAS ══
 function cambiarColorCarpetas() {
@@ -910,34 +942,30 @@ function cambiarColorCarpetas() {
     renderizarCarpetas();
 }
 
-// ══ APLICAR CONFIG GUARDADA ══
+// ══ APLICAR CONFIG ══
 function aplicarConfig() {
     const c = config;
     if (!c || !c.titulo) return;
-
     const t = document.getElementById('titulo');
-    t.style.color      = c.titulo.color      || '#8B4513';
-    t.style.fontSize   = (c.titulo.tamano    || '36') + 'px';
-    t.style.fontFamily = c.titulo.fuente     || 'Arial';
-    aplicarDisenoTitulo(c.titulo.diseno || 'normal');
-
+    t.style.color      = c.titulo.color   || '#8B4513';
+    t.style.fontSize   = (c.titulo.tamano || '36') + 'px';
+    t.style.fontFamily = c.titulo.fuente  || 'Arial';
+    aplicarDisenoTitulo(c.titulo.diseno   || 'normal');
     document.getElementById('colorTitulo').value  = c.titulo.color   || '#8B4513';
     document.getElementById('tamanoTitulo').value = c.titulo.tamano  || '36';
     document.getElementById('fuenteTitulo').value = c.titulo.fuente  || 'Arial';
     document.getElementById('disenoTitulo').value = c.titulo.diseno  || 'normal';
-
     if (c.fondo) {
         const tipo = c.fondo.tipo || 'degradado';
-        document.getElementById('tipoFondo').value = tipo;
-        document.getElementById('color1').value      = c.fondo.color1     || '#ffecd2';
-        document.getElementById('color2').value      = c.fondo.color2     || '#fcb69f';
-        document.getElementById('colorSolido').value = c.fondo.colorSolido || '#ffecd2';
+        document.getElementById('tipoFondo').value   = tipo;
+        document.getElementById('color1').value       = c.fondo.color1      || '#ffecd2';
+        document.getElementById('color2').value       = c.fondo.color2      || '#fcb69f';
+        document.getElementById('colorSolido').value  = c.fondo.colorSolido || '#ffecd2';
         cambiarTipoFondo();
     }
-
     if (c.fotos) {
         const forma = c.fotos.forma || 'cuadricula';
-        document.getElementById('formaFotos').value    = forma;
+        document.getElementById('formaFotos').value     = forma;
         document.getElementById('fotosPorPagina').value = c.fotos.porPagina || '9';
         document.getElementById('modoVista').value      = c.fotos.vista     || 'paginas';
         document.getElementById('galeria').className    = 'galeria ' + forma;
@@ -945,7 +973,6 @@ function aplicarConfig() {
         modoVista      = c.fotos.vista || 'paginas';
         fotosVisibles  = fotosPorPagina;
     }
-
     if (c.carpetas) {
         document.getElementById('colorCarpetas').value    = c.carpetas.color    || '#ffffff';
         document.getElementById('opacidadCarpetas').value = c.carpetas.opacidad || '40';
@@ -958,7 +985,6 @@ function guardarConfig(seccion) {
     if (!config.fondo)    config.fondo    = {};
     if (!config.fotos)    config.fotos    = {};
     if (!config.carpetas) config.carpetas = {};
-
     if (seccion === 'titulo') {
         config.titulo.color   = document.getElementById('colorTitulo').value;
         config.titulo.tamano  = document.getElementById('tamanoTitulo').value;
@@ -977,10 +1003,9 @@ function guardarConfig(seccion) {
         config.carpetas.color    = document.getElementById('colorCarpetas').value;
         config.carpetas.opacidad = document.getElementById('opacidadCarpetas').value;
     }
-
     const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
-    const a    = document.createElement('a');
-    a.href     = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
     a.download = 'config.json';
     a.click();
     mostrarToast('✅ config.json descargado — súbelo a GitHub para guardar');
@@ -997,14 +1022,7 @@ function mostrarToast(msg) {
 
 // ══ TECLADO ══
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-        cerrarLightbox();
-        cerrarModal();
-        cerrarModalSubir();
-        cerrarModalMover();
-        cerrarLogin();
-        cerrarModalConfirmar();
-    }
+    if (e.key === 'Escape') { cerrarLightbox(); cerrarModal(); cerrarModalSubir(); cerrarModalMover(); cerrarLogin(); cerrarModalConfirmar(); }
     if (e.key === 'ArrowRight') cambiarFoto(1);
     if (e.key === 'ArrowLeft')  cambiarFoto(-1);
 });
